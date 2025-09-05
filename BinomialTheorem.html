@@ -1,0 +1,101 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="Shift_JIS">
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+	  TeX: {  extensions: ["color.js"] }
+	});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<title>2項定理　展開式ジェネレータ</title> 
+	<script language="javascript" type="text/javascript">
+	function OnButtonClick() {
+		var howtoshow = document.getElementById( "radio1" ) ;
+		var expo = Number(document.getElementById( "text1" ).value ) ;
+		var target = document.getElementById("output");
+
+		//ここから展開式の生成
+		target.innerHTML += "\\(";
+
+		for (let i=0; i <= expo; i++) {
+			//最初の項以外は+でつなげる
+			if ( i != 0 ) {
+				target.innerHTML += "+";
+			}
+
+			//係数部分
+			if ( howtoshow.checked ) {
+				var conbnation = my_conbnation(expo, i);
+				if (conbnation != 1) {
+					target.innerHTML += String(conbnation);
+				}
+			} else {
+				target.innerHTML += "{}_";
+				target.innerHTML += String(expo);
+				target.innerHTML += "\\mathrm{C} _";
+				target.innerHTML += String(i);
+			}
+
+			//a^□b^□の部分
+			if ( howtoshow.checked ) {
+				if ( expo-i == 1 ) {
+					target.innerHTML += "a";
+				} else if ( expo-i != 0 ) {
+					target.innerHTML += "a^";
+					target.innerHTML += String(expo-i);
+				}
+			} else {
+				target.innerHTML += "a^";
+				target.innerHTML += String(expo-i);
+			}
+			if ( howtoshow.checked ) {
+				if ( i == 1 ) {
+					target.innerHTML += "b";
+				} else if ( i != 0 ) {
+					target.innerHTML += "b^";
+					target.innerHTML += String(i);
+				}
+			} else {
+				target.innerHTML += "b^";
+				target.innerHTML += String(i);
+			}
+		}
+		target.innerHTML += "\\)";
+		//ここまで展開式の生成
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+	}
+	//コンビネーション
+	function my_conbnation(n,r) {
+		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
+	}
+	//階乗
+	function my_factorial(n) {
+		if (n==0) {
+			return 1;
+		}
+		return (n * my_factorial(n-1));
+	}
+</script>
+</head>
+<body>
+<h1>2項定理　展開式ジェネレータ</h1>
+<p>表示方法
+	<input type="radio" id="radio1" name="radio1" value="num" checked> 数値
+	<input type="radio" id="radio2" name="radio1" value="combination"> コンビネーション
+</p>
+<p>
+	\( n= \)
+	<input type="text" id="text1" value="" size="1" maxlength="1"/>
+	のとき、\( (a+b)^n= \)
+	<div id="output"></div>
+</p>
+<p>
+	<input type="button" value="計算" onclick="OnButtonClick();"/>
+</p>
+<p>
+	<a href="BinomialTheorem2.html">係数ありのケースはこちらへ</a>
+</p>
+</body>
+</html>

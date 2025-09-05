@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="utf-8">
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+	  TeX: {  extensions: ["color.js"] }
+	});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<title>自然対数の底はいくつくらい？</title> 
+	<script language="javascript" type="text/javascript">
+
+	function OnButtonClick() {
+		var kei = document.getElementById("kei").value;
+		var target = document.getElementById("answer");
+		var keibunnoichi, atai;
+
+		//is Not a Number
+		if (isNaN(kei)) {
+			target.innerHTML = "(半角で)数値を入力してね";
+		} else {
+			keibunnoichi = 1/kei;
+			atai = Math.pow(Number(kei) + 1, keibunnoichi);
+
+			/* console.log("kei ", kei);                   */
+			/* console.log("keibunnoichi ", keibunnoichi); */
+
+			target.innerHTML  = "\\(1+k=\\)" + financial(1 + Number(kei)) + "<br>";
+			target.innerHTML += "\\(\\frac{1}{k}=\\)" + financial(keibunnoichi) + "<br>";
+			target.innerHTML += make_napie() + "=" + financial(atai);
+		}
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+	}
+
+	//toFixedは固定小数点表記を用いてフォーマットする
+	function financial(x) {
+		return Number.parseFloat(x).toFixed(8);
+	}
+
+	function make_napie() {
+		var target="\\((1+k)^\\frac{1}{k}\\)";
+
+		return target;
+	}
+
+	window.onload = function() {
+		var target = document.getElementById("prob");
+
+		target.innerHTML = make_napie();
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+	}
+
+</script>
+</head>
+<body>
+<h1>自然対数の底はいくつくらい？</h1>
+<p>
+	<span id="prob">
+	</span>
+	の値を求める
+</p>
+<p>
+	k=<input type="text" id="kei" size="12" maxlength="12"/>のときを
+	<input type="button" value="計算すると" onclick="OnButtonClick();"/>
+</p>
+<p id="answer">
+</p>
+</body>
+</html>
+

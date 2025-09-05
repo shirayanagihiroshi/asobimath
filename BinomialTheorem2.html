@@ -1,0 +1,125 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="Shift_JIS">
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+	  TeX: {  extensions: ["color.js"] }
+	});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<title>2項定理　展開式ジェネレータ(係数あり)</title> 
+	<script language="javascript" type="text/javascript">
+	function OnButtonClick() {
+		const expo = Number(document.getElementById( "ruijyou" ).value ) ;
+		const akeisuu = Number(document.getElementById( "a-keisuu" ).value ) ;
+		const bkeisuu = Number(document.getElementById( "b-keisuu" ).value ) ;
+		let target = document.getElementById("output");
+
+		//係数、指数が未入力または0の場合は入力を促す
+		if ( akeisuu  == 0 || bkeisuu  == 0 || expo  == 0 ) {
+			target.innerHTML += "0以外の係数、指数を入力してください";
+			return ;
+		}
+
+		//ここから展開式の生成
+		target.innerHTML += "\\(";
+
+		//左辺
+		target.innerHTML += "(";
+		if ( akeisuu  == -1 ) {
+			target.innerHTML += "-";
+		} else if ( akeisuu  != 1 ) {
+			target.innerHTML += String(akeisuu);
+		}
+		target.innerHTML += "a";
+		if (bkeisuu > 0) {
+			target.innerHTML += "+";
+		}//負のときは係数表示のマイナスで項がつながる
+		if ( bkeisuu  == -1 ) {
+			target.innerHTML += "-";
+		} else if ( bkeisuu  != 1 ) {
+			target.innerHTML += String(bkeisuu);
+		}
+		target.innerHTML += "b";
+		target.innerHTML += ")^";
+		target.innerHTML += String(expo);
+		target.innerHTML += "=";
+
+		for (let i=0; i <= expo; i++) {
+			const keisuu = my_exponential(akeisuu, expo-i) * my_exponential(bkeisuu, i);
+
+			//最初の項以外は+でつなげる
+			if ( i != 0 ) {
+				if (keisuu > 0) {
+					target.innerHTML += "+";
+				}//係数が負のときは係数表示のマイナスで項がつながる
+			}
+
+			//係数部分
+			const conbnation = my_conbnation(expo, i) * keisuu;
+			if (conbnation == -1) {
+				target.innerHTML += "-";
+			} else if (conbnation != 1) {
+				target.innerHTML += String(conbnation);
+			}
+
+			//a^□b^□の部分
+			if ( expo-i == 1 ) {
+				target.innerHTML += "a";
+			} else if ( expo-i != 0 ) {
+				target.innerHTML += "a^";
+				target.innerHTML += String(expo-i);
+			}
+			if ( i == 1 ) {
+				target.innerHTML += "b";
+			} else if ( i != 0 ) {
+				target.innerHTML += "b^";
+				target.innerHTML += String(i);
+			}
+		}
+		target.innerHTML += "\\)";
+		//ここまで展開式の生成
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+	}
+	//コンビネーション(nCr)
+	function my_conbnation(n,r) {
+		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
+	}
+	//階乗
+	function my_factorial(n) {
+		if (n==0) {
+			return 1;
+		}
+		return (n * my_factorial(n-1));
+	}
+	//累乗(aのb乗)
+	function my_exponential(a,b) {
+		if (b==0) {
+			return 1;
+		}
+		return (a*my_exponential(a, (b-1)));
+	}
+</script>
+</head>
+<body>
+<h1>2項定理　展開式ジェネレータ(係数あり)</h1>
+<p>
+	\( n= \)
+	<input type="text" id="ruijyou" value="" size="1" maxlength="1"/>
+	のとき、\( ( \)  
+	<input type="text" id="a-keisuu" value="" size="2" maxlength="2"/>
+	\( a+ \)
+	<input type="text" id="b-keisuu" value="" size="2" maxlength="2"/>
+	\( b)^n \)　を展開する
+	<div id="output"></div>
+</p>
+<p>
+	<input type="button" value="計算" onclick="OnButtonClick();"/>
+</p>
+<p>
+	<a href="BinomialTheorem.html">係数が1のケースはこちらへ</a>
+</p>
+</body>
+</html>

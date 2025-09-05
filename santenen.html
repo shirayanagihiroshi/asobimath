@@ -1,0 +1,324 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="Shift_JIS">
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+	  TeX: {  extensions: ["color.js"] }
+	});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<title>3点を通る円の方程式を求める</title> 
+	<script language="javascript" type="text/javascript">
+	function OnClick() {
+		var minus = {numerator : -1,denominator : 1};
+		var z1x = {numerator : Number(document.getElementById("zahyou_1_x").value), denominator : 1};
+		var z1y = {numerator : Number(document.getElementById("zahyou_1_y").value), denominator : 1};
+		var z2x = {numerator : Number(document.getElementById("zahyou_2_x").value), denominator : 1};
+		var z2y = {numerator : Number(document.getElementById("zahyou_2_y").value), denominator : 1};
+		var z3x = {numerator : Number(document.getElementById("zahyou_3_x").value), denominator : 1};
+		var z3y = {numerator : Number(document.getElementById("zahyou_3_y").value), denominator : 1};
+		var target = document.getElementById("answer");
+
+		var p1,p2,p3,p4,p5,p6,p7,p8,p9,a1,a2,a3;
+
+		p1 = z1x;
+		p2 = z1y;
+		p3 = {numerator : 1, denominator : 1};
+		p4 = z2x;
+		p5 = z2y;
+		p6 = {numerator : 1, denominator : 1};
+		p7 = z3x;
+		p8 = z3y;
+		p9 = {numerator : 1, denominator : 1};
+		a1 = my_multiple_fraction(minus, my_add_fraction(my_exponential_fraction(z1x, 2), my_exponential_fraction(z1y, 2)));
+		a2 = my_multiple_fraction(minus, my_add_fraction(my_exponential_fraction(z2x, 2), my_exponential_fraction(z2y, 2)));
+		a3 = my_multiple_fraction(minus, my_add_fraction(my_exponential_fraction(z3x, 2), my_exponential_fraction(z3y, 2)));
+
+		var sol = [];
+		var bairitsu2, bairitsu3;
+
+		if (p3.numerator == 0 && p6.numerator == 0 && p9.numerator == 0) {
+			//解けない
+		} else if (p3.numerator != 0 && p6.numerator == 0 && p9.numerator == 0) {
+			sol = renritsu_2_2(p3, p4, a2, p7, p8, a3);
+			//この辺はあとで実装する。
+		} else if (p3.numerator == 0 && p6.numerator != 0 && p9.numerator == 0) {
+		} else if (p3.numerator == 0 && p6.numerator == 0 && p9.numerator != 0) {
+		} else if (p3.numerator != 0 && p6.numerator != 0 && p9.numerator == 0) {
+		} else if (p3.numerator == 0 && p6.numerator != 0 && p9.numerator != 0) {
+		} else if (p3.numerator != 0 && p6.numerator == 0 && p9.numerator != 0) {
+		} else if (p3.numerator != 0 && p6.numerator != 0 && p9.numerator != 0) {
+			bairitsu2 = my_multiple_fraction(p6, my_get_reciprocal(p3));
+			bairitsu3 = my_multiple_fraction(p9, my_get_reciprocal(p3));
+			sol = renritsu_2_2(my_diff_fraction(p4, my_multiple_fraction(bairitsu2, p1)),
+						my_diff_fraction(p5, my_multiple_fraction(bairitsu2, p2)),
+						my_diff_fraction(a2, my_multiple_fraction(bairitsu2, a1)),
+						my_diff_fraction(p7, my_multiple_fraction(bairitsu3, p1)),
+						my_diff_fraction(p8, my_multiple_fraction(bairitsu3, p2)),
+						my_diff_fraction(a3, my_multiple_fraction(bairitsu3, a1)))
+			
+			sol[2] = my_multiple_fraction(my_get_reciprocal(p3), my_diff_fraction(a1, my_add_fraction(my_multiple_fraction(p1, sol[0]), my_multiple_fraction(p2, sol[1]))));
+		}
+
+//		console.log(p1);
+
+		target.innerHTML = "\\( x^2 + y^2 +";
+		target.innerHTML += my_frac_to_latex_string(sol[0]);
+		target.innerHTML += "x+";
+		target.innerHTML += my_frac_to_latex_string(sol[1]);
+		target.innerHTML += "y+";
+		target.innerHTML += my_frac_to_latex_string(sol[2]);
+		target.innerHTML += "=0  \\)";
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+
+	}
+
+	function make_2_2_matrix (a00, a01, a10, a11) {
+		var m = [[a00, a01],
+			[a10, a11]];
+		return m;
+	}
+
+	function get_2_2_determinant(m) {
+		var z = my_diff_fraction(my_multiple_fraction(m[0][0], m[1][1]), my_multiple_fraction(m[0][1], m[1][0]));
+
+		return z;
+	}
+
+	function get_2_2_inverse(m) {
+		var minus = {numerator : -1,
+				denominator : 1};
+		var d = my_get_reciprocal(get_2_2_determinant(m));
+
+		var n = [[my_multiple_fraction(d, m[1][1]), my_multiple_fraction(d, my_multiple_fraction(minus, m[0][1]))],
+			[my_multiple_fraction(d, my_multiple_fraction(minus, m[1][0])), my_multiple_fraction(d, m[0][0])]];
+		return n;
+	}
+
+	function multi_2_2_matrix_vector(m, x) {
+		var y = [my_add_fraction(my_multiple_fraction(m[0][0], x[0]), my_multiple_fraction(m[0][1], x[1])),
+			my_add_fraction(my_multiple_fraction(m[1][0], x[0]), my_multiple_fraction(m[1][1], x[1]))];
+		return y;
+	}
+
+	//2×2の連立方程式
+	// (a1)x+(b1)y = c1
+	// (a2)x+(b2)y = c2  を解く
+	function renritsu_2_2 (a1, b1, c1, a2, b2, c2) {
+		var m = make_2_2_matrix(a1, b1, a2, b2);
+		var x = [c1, c2];
+		var det = get_2_2_determinant(m);
+		var inv_m, sol;
+
+		if (det.numerator != 0 ) {
+			inv_m = get_2_2_inverse(m);
+
+			sol = multi_2_2_matrix_vector(inv_m, x);
+			return sol;
+		}
+	}
+
+	//分数の逆数を返す。0ならそのまま返す。
+	function my_get_reciprocal(x) {
+
+		var z = {numerator : x.numerator,
+			denominator : x.denominator};
+
+		if ( x.numerator != 0 ) {
+			if (x.numerator > 0) {
+				z = {numerator : x.denominator,
+					denominator : x.numerator};
+			} else {
+				z = {numerator : x.denominator * (-1),
+					denominator : x.numerator * (-1)};
+			}
+		}
+		return z;
+	}
+
+	//分数の足し算
+	function my_add_fraction(x, y) {
+		const divisor = my_EuclidsAlgorithm(x.denominator, y.denominator)
+		const xbaibun = y.denominator / divisor;
+		const ybaibun = x.denominator / divisor;
+		var z = {numerator : (x.numerator * xbaibun) + (y.numerator * ybaibun),
+			denominator : (x.denominator * xbaibun)};
+		return my_about(z);
+	}
+
+	//分数の引き算
+	function my_diff_fraction(x, y) {
+		var minus = {numerator : -1,
+				denominator : 1};
+		var z = my_add_fraction(x, my_multiple_fraction(minus, y));
+		return z;
+	}
+
+	//分数の掛け算
+	function my_multiple_fraction(x, y) {
+		var z = {numerator : (x.numerator * y.numerator),
+			denominator : (x.denominator * y.denominator)};
+		return my_about(z);
+	}
+
+	//約分
+	//分子は正の数でも負の数でもよい。分母は正の数のみ許容する。
+	function my_about(x) {
+		var minus = 0;
+
+		//分子が0なら何もしない
+		if (x.numerator == 0) {
+			return x;
+		}
+
+		//分子が負の数なら一旦正の数にしておいて、最後に戻す
+		if (x.numerator < 0) {
+			x.numerator = x.numerator * (-1);
+			minus = 1;
+		}
+
+		const divisor = my_EuclidsAlgorithm(x.numerator, x.denominator)
+
+		x.numerator = x.numerator/divisor;
+		x.denominator = x.denominator/divisor;
+
+		if (minus == 1) {
+			x.numerator = x.numerator * (-1);
+		}
+		return x;
+	}
+
+	//ユークリッドの互除法によってaとbの最大公約数を求める
+	function my_EuclidsAlgorithm(a, b) {
+		if (b > a) {
+			//aとbを入れ替える
+			const temp = a;
+			a = b;
+			b= temp;
+		}
+
+		const remainder = a % b;
+
+		if (remainder == 0) {
+			return b;
+		} else {
+			return my_EuclidsAlgorithm(b, remainder);
+		}
+
+	}
+
+	//コンビネーション
+	function my_conbnation(n,r) {
+		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
+	}
+
+	//階乗
+	function my_factorial(n) {
+		if (n==0) {
+			return 1;
+		}
+		return (n * my_factorial(n-1));
+	}
+
+	//累乗(aのb乗)
+	function my_exponential(a,b) {
+		if (b==0) {
+			return 1;
+		}
+		return (a*my_exponential(a, (b-1)));
+	}
+
+	//累乗(aのb乗。aは分数、bは整数)
+	function my_exponential_fraction(a,b) {
+		var ichi = {numerator : 1,
+			denominator : 1 };
+
+		if (b == 0) {
+			return ichi;
+		}
+		return (my_multiple_fraction(a, my_exponential_fraction(a, b-1)));
+	}
+
+	//分数をlatex表現にする。
+	//第2引数は整数1、-1の場合に表示を省略するかどうか
+	//omitte:0 省略しない
+	//omitte:1 省略する
+	function my_frac_to_latex_string(a, omitte) {
+		var latex = "";
+
+		//0はスルー
+		if (a.numerator == 0) {
+			return latex;
+		}
+		//分母が1なら整数表示
+		if (a.denominator == 1) {
+			if (a.numerator == 1) {
+				if (omitte == 0) {
+					latex += String(a.numerator);
+				} else {
+					//このケースは表示を省略
+				}
+			} else if (a.numerator == -1) {
+				if (omitte == 0) {
+					latex += String(a.numerator);
+				} else {
+					latex += "-";
+				}
+			} else {
+				latex += String(a.numerator);
+			}
+			return latex;
+		}
+		//マイナスの記号は分数の前に出す
+		if (a.numerator < 0) {
+			latex += "-";
+		}
+		//分母が1でなければ分数表示
+		latex += "\\frac{";
+		if (a.numerator < 0) {
+			latex += String(a.numerator * (-1));
+		} else {
+			latex += String(a.numerator);
+		}
+		latex += "}{";
+		latex += String(a.denominator);
+		latex += "}";
+		return latex;
+	}
+
+	window.onload = function() {
+	}
+
+</script>
+<style>
+	table {
+		table-layout: fixed;     /* 固定レイアウト */
+	}
+</style>
+</head>
+<body>
+<h1>3点を通る円の方程式を求める</h1>
+<p>
+	\(\ ( \)
+	<input type="text" id="zahyou_1_x" value="" size="3" maxlength="3"/>
+	\(\ , \)
+	<input type="text" id="zahyou_1_y" value="" size="3" maxlength="3"/>
+	\(\ ), \)
+	\(\ ( \)
+	<input type="text" id="zahyou_2_x" value="" size="3" maxlength="3"/>
+	\(\ , \)
+	<input type="text" id="zahyou_2_y" value="" size="3" maxlength="3"/>
+	\(\ ), \)
+	\(\ ( \)
+	<input type="text" id="zahyou_3_x" value="" size="3" maxlength="3"/>
+	\(\ , \)
+	<input type="text" id="zahyou_3_y" value="" size="3" maxlength="3"/>
+	\(\ ) \)を通る円の方程式を計算する。
+</p>
+<input type="button" value="計算" onclick="OnClick()"/>
+<p id="answer">
+</p>
+</body>
+</html>

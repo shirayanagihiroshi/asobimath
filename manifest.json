@@ -1,0 +1,18 @@
+﻿{
+  "name": "let's play math",
+  "short_name" : "LPM",
+  "icons": [
+    {
+      "src": "icon1.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon2.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}

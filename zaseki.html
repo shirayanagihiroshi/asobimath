@@ -1,0 +1,620 @@
+<html>
+<head>
+	<meta http-equiv="content-type" charset="Shift_JIS">
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+	  TeX: {  extensions: ["color.js"] }
+	});
+	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<title>次は君の番だ！</title> 
+	<script language="javascript" type="text/javascript">
+	//こういうグローバルな変数を安易に増やすと死ぬ
+	var mode = 0; //1:未使用の席の設定、2:運用中
+	var shimei_count = [];
+	var yoko,tate;
+
+	function Onconfig () {
+		var target = document.getElementById("config");
+		var target_form = document.getElementById("getname");
+		var i,j;
+
+		yoko = document.getElementById("config_yoko").value;
+		tate = document.getElementById("config_tate").value;
+
+		//指名カウンターを用意する
+		for (i = 0;i < tate ; i++) {
+			shimei_count[i] = [];
+
+			for (j = 0;j < yoko ; j++) {
+				shimei_count[i][j] = {counter:0,student_name:""};
+				//console.log("shimei_count[" + String(i) + "][" + String(j) + "]");
+			}
+		}
+
+		//まずは未使用の席の設定
+		mode = 1;
+
+		target.innerHTML = "<input type=\"button\" value=\"開始する\" onclick=\"Onconfig_start()\"/>";
+		target_form.innerHTML = "";
+
+		show_shimei_table(-1,-1);
+	}
+
+	function get_and_set_name () {
+		var fileInput = document.getElementById('getfile');
+		var target_config = document.getElementById("config");
+		var target_form = document.getElementById("getname");
+		var fileReader = new FileReader();
+		var file = fileInput.files[0];
+		var no_kaigou_str = "";
+		var i,j = 0;
+		fileReader.onload = function (event) {
+
+			var name_array = [];
+			var name_string = fileReader.result.split('\n');
+			for (i = 0; i < name_string.length; i++) {
+				name_array[i] = name_string[i].split(',');
+			}
+
+			tate = name_string.length;
+			yoko = name_array[0].length;
+
+			//指名カウンターを用意する
+			for (i = 0;i < tate ; i++) {
+				shimei_count[i] = [];
+
+				for (j = 0;j < yoko ; j++) {
+					shimei_count[i][j] = {counter:0,student_name:""};
+					//console.log("shimei_count[" + String(i) + "][" + String(j) + "]");
+				}
+			}
+
+			for (i = 0;i < tate ; i++) {
+				for (j = 0;j < yoko ; j++) {
+					if (name_array[i][j].match("-")) { //== "-" でチェックすると、\rが悪さをすることがある
+						shimei_count[i][j].counter = -1;
+					} else {
+						shimei_count[i][j].student_name = name_array[i][j];
+					}
+				}
+			}
+
+			target_config.innerHTML = "<input type=\"button\" value=\"誰か選ぶ\" onclick=\"Onconfig_choice()\"/>";
+			target_form.innerHTML = "";
+			//運用開始
+			mode = 2;
+
+			show_shimei_table(-1,-1);
+		}
+		fileReader.readAsText(file);
+	}
+
+	function Onconfig_start () {
+		var target = document.getElementById("config");
+		var target_form = document.getElementById("getname");
+		var form = document.forms.getfileform;
+
+		//運用開始
+		mode = 2;
+
+		target.innerHTML = "<input type=\"button\" value=\"誰か選ぶ\" onclick=\"Onconfig_choice()\"/>";
+		target_form.innerHTML = "";
+
+		show_shimei_table(-1,-1);
+	}
+
+	function Onconfig_choice () {
+		seki = choice_zaseki();
+
+		shimei_count[seki.tate][seki.yoko].counter = shimei_count[seki.tate][seki.yoko].counter + 1;
+
+		show_shimei_table(seki.tate, seki.yoko);
+	}
+	function OnZasekiClick(i, j) {
+		var target = document.getElementById("config");
+
+		switch(mode) {
+			case 1://未使用の席の設定
+				shimei_count[i][j].counter = -1;
+				break;
+			case 2://運用中
+				shimei_count[i][j].counter = shimei_count[i][j].counter + 1;
+				break;
+		}
+		show_shimei_table(-1,-1);
+	}
+	function show_shimei_table(i_,j_) {
+		var target_filed = document.getElementById("table_filed");
+		var temp;
+
+		//なぜかtarget_filed.innerHTMLに直接文字列を連結していくと、タグ部分が認識されない。
+		//後で調査すること
+		temp = "<table border=1 width = \"75%\" height = \"75%\" >";
+		for (i = 0;i < tate ; i++) {
+			temp += "<tr>";
+
+			for (j = 0;j < yoko ; j++) {
+
+				temp += "<td bgcolor=\"" + getcolor(shimei_count[i][j].counter) + "\">";
+
+				switch(mode) {
+					case 1://未使用の席の設定
+						temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "この席は未使用です" + "</span>" +  "</td>";
+						break;
+					case 2://運用中
+						if (shimei_count[i][j].counter != -1) {
+							if (i_ == i && j_ == j) {
+//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "次は君の番だ！" + "回数:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
+								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + " 次は君の番だ！" + "　　　" + "</span>" +  "</td>";
+							} else
+//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "回数:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
+								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + "　　　"  + "</span>" +  "</td>";
+							}
+						break;
+				}
+			}
+			temp += "</tr>";
+		}
+		temp += "</table>";
+		target_filed.innerHTML = temp;
+	}
+
+	function getcolor(n) {
+		var color = "";
+
+		switch (n) {
+			case -1:
+				color += "#808080";
+				break;
+			case 0:
+				color += "#ffffff";
+				break;
+			case 1:
+				color += "#ffff00";
+				break;
+			case 2:
+				color += "#ff4500";
+				break;
+			case 3:
+				color += "#c71585";
+				break;
+			default:
+				color += "#4b0082";
+					break;
+		}
+		return color;
+	}
+	//未使用の席を除いた席の数を数える
+	function count_zaseki() {
+		var counter = 0;
+
+		for (i = 0;i < tate ; i++) {
+			for (j = 0;j < yoko ; j++) {
+				if (shimei_count[i][j].counter != -1) {
+					counter = counter + 1;
+				}
+			}
+		}
+		return counter;
+	}
+	//使用中の席から一つをランダムで選ぶ
+	//ダサいのでこのへんもう少し考える
+	function choice_zaseki() {
+		var temp = get_random_Integer(0, count_zaseki() - 1);
+		var exit_flg = 0;
+		var seki;
+
+		for (i = 0;i < tate ; i++) {
+			for (j = 0;j < yoko ; j++) {
+				if (shimei_count[i][j].counter != -1) {
+
+					if (temp != 0) {
+						temp = temp -1;
+					} else {
+						seki = {tate : i,
+							yoko : j}
+						exit_flg = 1;
+						break;
+					}
+				}
+			}
+
+			if (exit_flg == 1) {
+				break;
+			}
+		}
+		return seki;
+	}
+
+	function OnButtonClick() {
+		var target_prob = document.getElementById("prob");
+		var target_ans_bunshi = Number(document.getElementById("bunshi").value);
+		var yattane = 2;
+		var target_ans_bunbo;
+
+		//採点の部
+		//答えが整数のとき
+		if (ans.denominator == 1) {
+			if (target_ans_bunshi == ans.numerator ) {
+				yattane = 1;
+				level = level + 1;
+			}
+		//答えが整数値のとき
+		} else {
+			target_ans_bunbo = Number(document.getElementById("bunbo").value);
+
+			if (target_ans_bunshi == ans.numerator && target_ans_bunbo == ans.denominator) {
+				yattane = 1;
+				level = level + 1;
+			}
+		}
+
+		//次の問題の作成の部
+		p = make_problem();
+		ans = my_integral(p);
+
+		show_level(level, yattane)
+		target_prob.innerHTML = make_integral_latex_string(p);
+		prepare_ans(ans);
+
+//		console.log(ans.numerator);
+//		console.log(ans.denominator);
+
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target_prob]);
+	}
+
+	//分数の足し算
+	function my_add_fraction(x, y) {
+		const divisor = my_EuclidsAlgorithm(x.denominator, y.denominator)
+		const xbaibun = y.denominator / divisor;
+		const ybaibun = x.denominator / divisor;
+		var z = {numerator : (x.numerator * xbaibun) + (y.numerator * ybaibun),
+			denominator : (x.denominator * xbaibun)};
+		return my_about(z);
+	}
+
+	//分数の掛け算
+	function my_multiple_fraction(x, y) {
+		var z = {numerator : (x.numerator * y.numerator),
+			denominator : (x.denominator * y.denominator)};
+		return my_about(z);
+	}
+
+	//約分
+	//分子は正の数でも負の数でもよい。分母は正の数のみ許容する。
+	function my_about(x) {
+		var minus = 0;
+
+		//分子が0なら何もしない
+		if (x.numerator == 0) {
+			return x;
+		}
+
+		//分子が負の数なら一旦正の数にしておいて、最後に戻す
+		if (x.numerator < 0) {
+			x.numerator = x.numerator * (-1);
+			minus = 1;
+		}
+
+		const divisor = my_EuclidsAlgorithm(x.numerator, x.denominator)
+
+		x.numerator = x.numerator/divisor;
+		x.denominator = x.denominator/divisor;
+
+		if (minus == 1) {
+			x.numerator = x.numerator * (-1);
+		}
+		return x;
+	}
+
+	//ユークリッドの互除法によってaとbの最大公約数を求める
+	function my_EuclidsAlgorithm(a, b) {
+		if (b > a) {
+			//aとbを入れ替える
+			const temp = a;
+			a = b;
+			b= temp;
+		}
+
+		const remainder = a % b;
+
+		if (remainder == 0) {
+			return b;
+		} else {
+			return my_EuclidsAlgorithm(b, remainder);
+		}
+
+	}
+
+	//コンビネーション
+	function my_conbnation(n,r) {
+		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
+	}
+
+	//階乗
+	function my_factorial(n) {
+		if (n==0) {
+			return 1;
+		}
+		return (n * my_factorial(n-1));
+	}
+
+	//累乗(aのb乗)
+	function my_exponential(a,b) {
+		if (b==0) {
+			return 1;
+		}
+		return (a*my_exponential(a, (b-1)));
+	}
+
+	//累乗(aのb乗。aは分数、bは整数)
+	//使ってないよー
+	function my_exponential_fraction(a,b) {
+		var ichi = {numerator : 1,
+			denominator : 1 };
+
+		if (b == 0) {
+			return ichi;
+		}
+		return (my_multiple_fraction(a, my_exponential_fraction(a, b-1)));
+	}
+
+	//minからmaxまでの整数からランダムに選んで出力する。
+	function get_random_Integer(min, max) {
+		var range = (max + 1) - min;
+		//お勉強めも。Math.randomは0<=x<1の中からランダムな値を返す。
+		//が、ガチなランダムではないでセキュリティが求められるものには使えない。
+		//Math.flooraは小数点以下の切り捨て
+		var rand = Math.floor(Math.random() * range) + min;
+		return rand;
+	}
+
+	//多項式の定積分の計算用
+	//xのn乗をaからbまで積分した値を求める。
+	function my_integral_inner(a, b, n) {
+		var aruijyou = my_exponential(a, (n + 1));
+		var bruijyou = my_exponential(b, (n + 1));
+
+		var z = {numerator : (bruijyou - aruijyou),
+			denominator : (n + 1)};
+		return my_about(z);
+	}
+
+	//分数をlatex表現にする。
+	//第2引数は整数1、-1の場合に表示を省略するかどうか
+	//omitte:0 省略しない
+	//omitte:1 省略する
+	function my_frac_to_latex_string(a, omitte) {
+		var latex = "";
+
+		//0はスルー
+		if (a.numerator == 0) {
+			return latex;
+		}
+		//分母が1なら整数表示
+		if (a.denominator == 1) {
+			if (a.numerator == 1) {
+				if (omitte == 0) {
+					latex += String(a.numerator);
+				} else {
+					//このケースは表示を省略
+				}
+			} else if (a.numerator == -1) {
+				if (omitte == 0) {
+					latex += String(a.numerator);
+				} else {
+					latex += "-";
+				}
+			} else {
+				latex += String(a.numerator);
+			}
+			return latex;
+		}
+		//マイナスの記号は分数の前に出す
+		if (a.numerator < 0) {
+			latex += "-";
+		}
+		//分母が1でなければ分数表示
+		latex += "\\frac{";
+		if (a.numerator < 0) {
+			latex += String(a.numerator * (-1));
+		} else {
+			latex += String(a.numerator);
+		}
+		latex += "}{";
+		latex += String(a.denominator);
+		latex += "}";
+		return latex;
+	}
+
+	//ax^nをlatex表現にする。
+	function my_kou_to_latex_string(a, n) {
+		var latex = "";
+
+		if (a.numerator == 0) {
+			return latex;
+		}
+
+		if (n > 1) {
+			latex += my_frac_to_latex_string(a, 1);
+			latex += "x^";
+			latex += String(n);
+		} else if (n == 1) {
+			latex += my_frac_to_latex_string(a, 1);
+			latex += "x";
+		} else if (n == 0) {
+			latex += my_frac_to_latex_string(a, 0);
+		}
+		return latex;
+	}
+
+	//積分の式をlatex表現にする。
+	function make_integral_latex_string(prob) {
+		var prev_kou_exist = 0;
+		var target="\\(";
+
+		target += "\\int^{";
+		target += String(prob.jyoutan);
+		target += "}_{";
+		target += String(prob.katan);
+		target += "}(";
+		if (prob.keisuu_3ji.numerator != 0) {
+			prev_kou_exist = 1;
+		}
+		target += my_kou_to_latex_string(prob.keisuu_3ji,3);
+		if (prob.keisuu_2ji.numerator != 0) {
+			if (prob.keisuu_2ji.numerator > 0 && prev_kou_exist == 1) {
+				target += "+";
+			}
+			prev_kou_exist = 1;
+		}
+		target += my_kou_to_latex_string(prob.keisuu_2ji,2);
+		if (prob.keisuu_1ji.numerator != 0) {
+			if (prob.keisuu_1ji.numerator > 0 && prev_kou_exist == 1) {
+				target += "+";
+			}
+			prev_kou_exist = 1;
+		}
+		target += my_kou_to_latex_string(prob.keisuu_1ji,1);
+		if (prob.keisuu_0ji.numerator != 0) {
+			if (prob.keisuu_0ji.numerator > 0 && prev_kou_exist == 1) {
+				target += "+";
+			}
+			prev_kou_exist = 1;
+		}
+		target += my_kou_to_latex_string(prob.keisuu_0ji,0);
+		target += ")dx\\)";
+		return target;
+	}
+
+	//入力フォームを3次式用へ変更
+	function to3ji(n) {
+		var target = document.getElementById("input");
+		target.innerHTML = "\\( ( \\)";
+		target.innerHTML += "<input type=\"text\" id=\"3jyou_keisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
+		target.innerHTML += "\\( x^3 + \\)";
+		target.innerHTML += "<input type=\"text\" id=\"2jyou_keisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
+		target.innerHTML += "\\( x^2 + \\)";
+		target.innerHTML += "<input type=\"text\" id=\"1jyou_keisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
+		target.innerHTML += "\\( x + \\)";
+		target.innerHTML += "<input type=\"text\" id=\"teisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
+		//mathjaxによる描画を要求する
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
+	}
+
+	//レベル表示
+	//comment 先頭に一言つける。
+	//0:つけない
+	//1:やったね！
+	//2:ざんねん！
+	function show_level(n, comment) {
+		var target = document.getElementById("level");
+
+		switch (comment) {
+			case 1:
+				target.innerHTML = "やったね！";
+				break;
+			case 2:
+				target.innerHTML = "ざんねん！";
+				break;
+			default:
+				target.innerHTML = "";
+				break;
+		}
+
+		target.innerHTML += "いま君は『";
+		switch (n) {
+			case 0:
+				target.innerHTML += "きんぎょ";
+				break;
+			case 1:
+				target.innerHTML += "ひよこ";
+				break;
+			case 2:
+				target.innerHTML += "人間";
+				break;
+			case 3:
+				target.innerHTML += "上級国民";
+				break;
+			default:
+				target.innerHTML += "神";
+				break;
+		}
+		target.innerHTML += "』レベルです。";
+	}
+
+	//多項式の定積分の計算用
+	function my_integral(p) {
+		var temp3ji, temp2ji, temp1ji, temp0ji, integral;
+
+		//ここで定積分の答えを計算する
+		temp3ji = my_multiple_fraction(p.keisuu_3ji, my_integral_inner(p.katan, p.jyoutan, 3));
+		temp2ji = my_multiple_fraction(p.keisuu_2ji, my_integral_inner(p.katan, p.jyoutan, 2));
+		temp1ji = my_multiple_fraction(p.keisuu_1ji, my_integral_inner(p.katan, p.jyoutan, 1));
+		temp0ji = my_multiple_fraction(p.keisuu_0ji, my_integral_inner(p.katan, p.jyoutan, 0));
+		integral = my_add_fraction(temp3ji, temp2ji);
+		integral = my_add_fraction(integral, temp1ji);
+		integral = my_add_fraction(integral, temp0ji);
+
+		return integral;
+	}
+
+	function make_problem() {
+		var k = get_random_Integer(-2, 2);
+		var prob = {keisuu_3ji : {numerator : get_random_Integer(-1, 2), denominator : 1},
+			    keisuu_2ji : {numerator : get_random_Integer(-1, 3), denominator : 1},
+			    keisuu_1ji : {numerator : get_random_Integer(-2, 3), denominator : 1},
+			    keisuu_0ji : {numerator : get_random_Integer(-4, 5), denominator : 1},
+			katan : k,
+			jyoutan : k + get_random_Integer(1, 3)};
+
+		return prob;
+	}
+
+	function prepare_ans(ans) {
+		var target = document.getElementById("answer");
+
+		if (ans.denominator == 1) {
+			target.innerHTML = "<input type=\"text\" id=\"bunshi\" value=\"\" size=\"4\" maxlength=\"4\"/>"
+		} else {
+			target.innerHTML = "<input type=\"text\" id=\"bunshi\" value=\"\" size=\"4\" maxlength=\"4\"/>"
+			target.innerHTML += "/";
+			target.innerHTML += "<input type=\"text\" id=\"bunbo\" value=\"\" size=\"4\" maxlength=\"4\"/>"
+			target.innerHTML += "　（左が分子で右が分母です。答えがマイナスの場合は分子を負の数にしてください）"
+		}
+	}
+
+	window.onload = function() {
+		var target = document.getElementById("config");
+		var target_form = document.getElementById("getname");
+
+		target.innerHTML = "横に";
+		target.innerHTML += "<input type=\"text\" id=\"config_yoko\" value=\"\" size=\"3\" maxlength=\"3\"/>";
+		target.innerHTML += "列、縦に";
+		target.innerHTML += "<input type=\"text\" id=\"config_tate\" value=\"\" size=\"3\" maxlength=\"3\"/>";
+		target.innerHTML += "列　";
+		target.innerHTML += "<input type=\"button\" value=\"設定\" onclick=\"Onconfig()\"/>";
+
+		target_form.innerHTML = "<form><input type=\"file\" id=\"getfile\" onchange=\"get_and_set_name()\"/></form>(csvを指定する。未使用席は\"-\"。EOFは最後の行につけておく（最後に改行しない）。文字コードがutf-8でないと文字化けするので注意)";
+
+	}
+
+</script>
+<style>
+	table {
+		table-layout: fixed;     /* 固定レイアウト */
+	}
+</style>
+</head>
+<body>
+<h1>次は君の番だ！</h1>
+<p id="config">
+</p>
+<p id="table_filed">
+</p>
+<p id="getname">
+</p>
+</body>
+</html>
