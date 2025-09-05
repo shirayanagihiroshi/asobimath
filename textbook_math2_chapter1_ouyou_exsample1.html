@@ -10,35 +10,35 @@
 	<title>例題</title> 
 </head>
 <body>
-<h1>例題　¥( (a+b+c)^7 ¥)の展開式における¥( a^3b^2c^2 ¥)の項の係数を求めよ。</h1>
-（¥( a ¥)でも¥( b ¥)でもいいけど）、¥( c ¥)の次数に注目する。（¥( a+b ¥)は見やすいように¥( M ¥)とおいておく）<br><br>
-¥( (a+b+c)^7 =(M+c)^7 ¥)を展開して、¥( c^2 ¥)が出てくるのは、¥( ¥textcolor{red}{{}_7 ¥mathrm{C} _2 M^5c^2} ¥)の項だけ。
+<h1>例題　\( (a+b+c)^7 \)の展開式における\( a^3b^2c^2 \)の項の係数を求めよ。</h1>
+（\( a \)でも\( b \)でもいいけど）、\( c \)の次数に注目する。（\( a+b \)は見やすいように\( M \)とおいておく）<br><br>
+\( (a+b+c)^7 =(M+c)^7 \)を展開して、\( c^2 \)が出てくるのは、\( \textcolor{red}{{}_7 \mathrm{C} _2 M^5c^2} \)の項だけ。
 <br><br>
-（参考：¥( (M+c)^7 ¥)を全部展開するとこんな感じ<br>
-¥( (M+c)^7 = {}_7 ¥mathrm{C} _0 M^7
-           + {}_7 ¥mathrm{C} _1 M^6c
-           + ¥textcolor{red}{{}_7 ¥mathrm{C} _2 M^5c^2}
-           + {}_7 ¥mathrm{C} _3 M^4c^3
-           + {}_7 ¥mathrm{C} _4 M^3c^4
-           + {}_7 ¥mathrm{C} _5 M^2c^5
-           + {}_7 ¥mathrm{C} _6 M  c^6
-           + {}_7 ¥mathrm{C} _7    c^7¥) ）<br><br>
+（参考：\( (M+c)^7 \)を全部展開するとこんな感じ<br>
+\( (M+c)^7 = {}_7 \mathrm{C} _0 M^7
+           + {}_7 \mathrm{C} _1 M^6c
+           + \textcolor{red}{{}_7 \mathrm{C} _2 M^5c^2}
+           + {}_7 \mathrm{C} _3 M^4c^3
+           + {}_7 \mathrm{C} _4 M^3c^4
+           + {}_7 \mathrm{C} _5 M^2c^5
+           + {}_7 \mathrm{C} _6 M  c^6
+           + {}_7 \mathrm{C} _7    c^7\) ）<br><br>
 
-さらに¥( {}_7 ¥mathrm{C} _2 M^5c^2 ¥)の中の¥( M^5 ¥)を展開するとこうなる<br>
-¥(  {}_7 ¥mathrm{C} _2¥textcolor{blue}{M^5}c^2
-¥¥ ={}_7 ¥mathrm{C} _2¥textcolor{blue}{(a+b)^5}c^2
-¥¥ ={}_7 ¥mathrm{C} _2¥textcolor{blue}{(
-             {}_5 ¥mathrm{C} _0 a^5
-           + {}_5 ¥mathrm{C} _1 a^4b
-           + ¥textcolor{magenta}{ {}_5 ¥mathrm{C} _2 a^3b^2} 
-           + {}_5 ¥mathrm{C} _3 a^2b^3
-           + {}_5 ¥mathrm{C} _4 a  b^4
-           + {}_5 ¥mathrm{C} _5    b^5 )} c^2 ¥)<br>
+さらに\( {}_7 \mathrm{C} _2 M^5c^2 \)の中の¥( M^5 \)を展開するとこうなる<br>
+\(  {}_7 \mathrm{C} _2\textcolor{blue}{M^5}c^2
+\\ ={}_7 \mathrm{C} _2\textcolor{blue}{(a+b)^5}c^2
+\\ ={}_7 \mathrm{C} _2\textcolor{blue}{(
+             {}_5 \mathrm{C} _0 a^5
+           + {}_5 \mathrm{C} _1 a^4b
+           + \textcolor{magenta}{ {}_5 \mathrm{C} _2 a^3b^2} 
+           + {}_5 \mathrm{C} _3 a^2b^3
+           + {}_5 \mathrm{C} _4 a  b^4
+           + {}_5 \mathrm{C} _5    b^5 )} c^2 \)<br>
 
-¥( (a+b)^5 ¥) の展開式の中で¥( a^3b^2 ¥) が表れるのは、¥( ¥textcolor{magenta}{{}_5 ¥mathrm{C} _2 a^3b^2} ¥)の項だけだから、
-上を展開して得られる式の中の¥( ¥textcolor{red}{{}_7 ¥mathrm{C} _2 ¥textcolor{magenta}{{}_5 ¥mathrm{C} _2a^3b^2}c^2} ¥)の項だけ気にすればよい。<br><br>
+\( (a+b)^5 \) の展開式の中で\( a^3b^2 \) が表れるのは、\( \textcolor{magenta}{{}_5 \mathrm{C} _2 a^3b^2} \)の項だけだから、
+上を展開して得られる式の中の\( \textcolor{red}{{}_7 \mathrm{C} _2 \textcolor{magenta}{{}_5 \mathrm{C} _2a^3b^2}c^2} \)の項だけ気にすればよい。<br><br>
 
-よって、¥( {}_7 ¥mathrm{C} _2 ¥times {}_5 ¥mathrm{C} _2 = ¥frac{7 ¥times 6}{2 ¥times 1} ¥times ¥frac{5 ¥times 4}{2 ¥times 1} = 210¥)
+よって、\( {}_7 \mathrm{C} _2 \times {}_5 \mathrm{C} _2 = \frac{7 \times 6}{2 \times 1} \times \frac{5 \times 4}{2 \times 1} = 210\)
 <p>
 	<a href="index.html">戻る</a>
 </p>
