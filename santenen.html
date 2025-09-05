@@ -1,13 +1,13 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
+	<meta http-equiv="content-type" charset="UTF-8">
 	<script type="text/x-mathjax-config">
 	MathJax.Hub.Config({ 
 	  TeX: {  extensions: ["color.js"] }
 	});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
-	<title>3“_‚ğ’Ê‚é‰~‚Ì•û’ö®‚ğ‹‚ß‚é</title> 
+	<title>3ç‚¹ã‚’é€šã‚‹å††ã®æ–¹ç¨‹å¼ã‚’æ±‚ã‚ã‚‹</title> 
 	<script language="javascript" type="text/javascript">
 	function OnClick() {
 		var minus = {numerator : -1,denominator : 1};
@@ -38,10 +38,10 @@
 		var bairitsu2, bairitsu3;
 
 		if (p3.numerator == 0 && p6.numerator == 0 && p9.numerator == 0) {
-			//‰ğ‚¯‚È‚¢
+			//è§£ã‘ãªã„
 		} else if (p3.numerator != 0 && p6.numerator == 0 && p9.numerator == 0) {
 			sol = renritsu_2_2(p3, p4, a2, p7, p8, a3);
-			//‚±‚Ì•Ó‚Í‚ ‚Æ‚ÅÀ‘•‚·‚éB
+			//ã“ã®è¾ºã¯ã‚ã¨ã§å®Ÿè£…ã™ã‚‹ã€‚
 		} else if (p3.numerator == 0 && p6.numerator != 0 && p9.numerator == 0) {
 		} else if (p3.numerator == 0 && p6.numerator == 0 && p9.numerator != 0) {
 		} else if (p3.numerator != 0 && p6.numerator != 0 && p9.numerator == 0) {
@@ -70,7 +70,7 @@
 		target.innerHTML += my_frac_to_latex_string(sol[2]);
 		target.innerHTML += "=0  \\)";
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 
 	}
@@ -103,9 +103,9 @@
 		return y;
 	}
 
-	//2~2‚Ì˜A—§•û’ö®
+	//2Ã—2ã®é€£ç«‹æ–¹ç¨‹å¼
 	// (a1)x+(b1)y = c1
-	// (a2)x+(b2)y = c2  ‚ğ‰ğ‚­
+	// (a2)x+(b2)y = c2  ã‚’è§£ã
 	function renritsu_2_2 (a1, b1, c1, a2, b2, c2) {
 		var m = make_2_2_matrix(a1, b1, a2, b2);
 		var x = [c1, c2];
@@ -120,7 +120,7 @@
 		}
 	}
 
-	//•ª”‚Ì‹t”‚ğ•Ô‚·B0‚È‚ç‚»‚Ì‚Ü‚Ü•Ô‚·B
+	//åˆ†æ•°ã®é€†æ•°ã‚’è¿”ã™ã€‚0ãªã‚‰ãã®ã¾ã¾è¿”ã™ã€‚
 	function my_get_reciprocal(x) {
 
 		var z = {numerator : x.numerator,
@@ -138,7 +138,7 @@
 		return z;
 	}
 
-	//•ª”‚Ì‘«‚µZ
+	//åˆ†æ•°ã®è¶³ã—ç®—
 	function my_add_fraction(x, y) {
 		const divisor = my_EuclidsAlgorithm(x.denominator, y.denominator)
 		const xbaibun = y.denominator / divisor;
@@ -148,7 +148,7 @@
 		return my_about(z);
 	}
 
-	//•ª”‚Ìˆø‚«Z
+	//åˆ†æ•°ã®å¼•ãç®—
 	function my_diff_fraction(x, y) {
 		var minus = {numerator : -1,
 				denominator : 1};
@@ -156,24 +156,24 @@
 		return z;
 	}
 
-	//•ª”‚ÌŠ|‚¯Z
+	//åˆ†æ•°ã®æ›ã‘ç®—
 	function my_multiple_fraction(x, y) {
 		var z = {numerator : (x.numerator * y.numerator),
 			denominator : (x.denominator * y.denominator)};
 		return my_about(z);
 	}
 
-	//–ñ•ª
-	//•ªq‚Í³‚Ì”‚Å‚à•‰‚Ì”‚Å‚à‚æ‚¢B•ª•ê‚Í³‚Ì”‚Ì‚İ‹–—e‚·‚éB
+	//ç´„åˆ†
+	//åˆ†å­ã¯æ­£ã®æ•°ã§ã‚‚è² ã®æ•°ã§ã‚‚ã‚ˆã„ã€‚åˆ†æ¯ã¯æ­£ã®æ•°ã®ã¿è¨±å®¹ã™ã‚‹ã€‚
 	function my_about(x) {
 		var minus = 0;
 
-		//•ªq‚ª0‚È‚ç‰½‚à‚µ‚È‚¢
+		//åˆ†å­ãŒ0ãªã‚‰ä½•ã‚‚ã—ãªã„
 		if (x.numerator == 0) {
 			return x;
 		}
 
-		//•ªq‚ª•‰‚Ì”‚È‚çˆê’U³‚Ì”‚É‚µ‚Ä‚¨‚¢‚ÄAÅŒã‚É–ß‚·
+		//åˆ†å­ãŒè² ã®æ•°ãªã‚‰ä¸€æ—¦æ­£ã®æ•°ã«ã—ã¦ãŠã„ã¦ã€æœ€å¾Œã«æˆ»ã™
 		if (x.numerator < 0) {
 			x.numerator = x.numerator * (-1);
 			minus = 1;
@@ -190,10 +190,10 @@
 		return x;
 	}
 
-	//ƒ†[ƒNƒŠƒbƒh‚ÌŒİœ–@‚É‚æ‚Á‚Äa‚Æb‚ÌÅ‘åŒö–ñ”‚ğ‹‚ß‚é
+	//ãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰ã®äº’é™¤æ³•ã«ã‚ˆã£ã¦aã¨bã®æœ€å¤§å…¬ç´„æ•°ã‚’æ±‚ã‚ã‚‹
 	function my_EuclidsAlgorithm(a, b) {
 		if (b > a) {
-			//a‚Æb‚ğ“ü‚ê‘Ö‚¦‚é
+			//aã¨bã‚’å…¥ã‚Œæ›¿ãˆã‚‹
 			const temp = a;
 			a = b;
 			b= temp;
@@ -209,12 +209,12 @@
 
 	}
 
-	//ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“
+	//ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³
 	function my_conbnation(n,r) {
 		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
 	}
 
-	//ŠKæ
+	//éšä¹—
 	function my_factorial(n) {
 		if (n==0) {
 			return 1;
@@ -222,7 +222,7 @@
 		return (n * my_factorial(n-1));
 	}
 
-	//—İæ(a‚Ìbæ)
+	//ç´¯ä¹—(aã®bä¹—)
 	function my_exponential(a,b) {
 		if (b==0) {
 			return 1;
@@ -230,7 +230,7 @@
 		return (a*my_exponential(a, (b-1)));
 	}
 
-	//—İæ(a‚ÌbæBa‚Í•ª”Ab‚Í®”)
+	//ç´¯ä¹—(aã®bä¹—ã€‚aã¯åˆ†æ•°ã€bã¯æ•´æ•°)
 	function my_exponential_fraction(a,b) {
 		var ichi = {numerator : 1,
 			denominator : 1 };
@@ -241,24 +241,24 @@
 		return (my_multiple_fraction(a, my_exponential_fraction(a, b-1)));
 	}
 
-	//•ª”‚ğlatex•\Œ»‚É‚·‚éB
-	//‘æ2ˆø”‚Í®”1A-1‚Ìê‡‚É•\¦‚ğÈ—ª‚·‚é‚©‚Ç‚¤‚©
-	//omitte:0 È—ª‚µ‚È‚¢
-	//omitte:1 È—ª‚·‚é
+	//åˆ†æ•°ã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
+	//ç¬¬2å¼•æ•°ã¯æ•´æ•°1ã€-1ã®å ´åˆã«è¡¨ç¤ºã‚’çœç•¥ã™ã‚‹ã‹ã©ã†ã‹
+	//omitte:0 çœç•¥ã—ãªã„
+	//omitte:1 çœç•¥ã™ã‚‹
 	function my_frac_to_latex_string(a, omitte) {
 		var latex = "";
 
-		//0‚ÍƒXƒ‹[
+		//0ã¯ã‚¹ãƒ«ãƒ¼
 		if (a.numerator == 0) {
 			return latex;
 		}
-		//•ª•ê‚ª1‚È‚ç®”•\¦
+		//åˆ†æ¯ãŒ1ãªã‚‰æ•´æ•°è¡¨ç¤º
 		if (a.denominator == 1) {
 			if (a.numerator == 1) {
 				if (omitte == 0) {
 					latex += String(a.numerator);
 				} else {
-					//‚±‚ÌƒP[ƒX‚Í•\¦‚ğÈ—ª
+					//ã“ã®ã‚±ãƒ¼ã‚¹ã¯è¡¨ç¤ºã‚’çœç•¥
 				}
 			} else if (a.numerator == -1) {
 				if (omitte == 0) {
@@ -271,11 +271,11 @@
 			}
 			return latex;
 		}
-		//ƒ}ƒCƒiƒX‚Ì‹L†‚Í•ª”‚Ì‘O‚Éo‚·
+		//ãƒã‚¤ãƒŠã‚¹ã®è¨˜å·ã¯åˆ†æ•°ã®å‰ã«å‡ºã™
 		if (a.numerator < 0) {
 			latex += "-";
 		}
-		//•ª•ê‚ª1‚Å‚È‚¯‚ê‚Î•ª”•\¦
+		//åˆ†æ¯ãŒ1ã§ãªã‘ã‚Œã°åˆ†æ•°è¡¨ç¤º
 		latex += "\\frac{";
 		if (a.numerator < 0) {
 			latex += String(a.numerator * (-1));
@@ -294,12 +294,12 @@
 </script>
 <style>
 	table {
-		table-layout: fixed;     /* ŒÅ’èƒŒƒCƒAƒEƒg */
+		table-layout: fixed;     /* å›ºå®šãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ */
 	}
 </style>
 </head>
 <body>
-<h1>3“_‚ğ’Ê‚é‰~‚Ì•û’ö®‚ğ‹‚ß‚é</h1>
+<h1>3ç‚¹ã‚’é€šã‚‹å††ã®æ–¹ç¨‹å¼ã‚’æ±‚ã‚ã‚‹</h1>
 <p>
 	\(\ ( \)
 	<input type="text" id="zahyou_1_x" value="" size="3" maxlength="3"/>
@@ -315,9 +315,9 @@
 	<input type="text" id="zahyou_3_x" value="" size="3" maxlength="3"/>
 	\(\ , \)
 	<input type="text" id="zahyou_3_y" value="" size="3" maxlength="3"/>
-	\(\ ) \)‚ğ’Ê‚é‰~‚Ì•û’ö®‚ğŒvZ‚·‚éB
+	\(\ ) \)ã‚’é€šã‚‹å††ã®æ–¹ç¨‹å¼ã‚’è¨ˆç®—ã™ã‚‹ã€‚
 </p>
-<input type="button" value="ŒvZ" onclick="OnClick()"/>
+<input type="button" value="è¨ˆç®—" onclick="OnClick()"/>
 <p id="answer">
 </p>
 </body>

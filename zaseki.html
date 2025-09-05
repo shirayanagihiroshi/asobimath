@@ -1,10 +1,10 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
-	<title>Ÿ‚ÍŒN‚Ì”Ô‚¾I</title> 
+	<meta http-equiv="content-type" charset="UTF-8">
+	<title>æ¬¡ã¯å›ã®ç•ªã ï¼</title> 
 	<script language="javascript" type="text/javascript">
-	//‚±‚¤‚¢‚¤ƒOƒ[ƒoƒ‹‚È•Ï”‚ğˆÀˆÕ‚É‘‚â‚·‚Æ€‚Ê
-	var mode = 0; //1:–¢g—p‚ÌÈ‚Ìİ’èA2:‰^—p’†
+	//ã“ã†ã„ã†ã‚°ãƒ­ãƒ¼ãƒãƒ«ãªå¤‰æ•°ã‚’å®‰æ˜“ã«å¢—ã‚„ã™ã¨æ­»ã¬
+	var mode = 0; //1:æœªä½¿ç”¨ã®å¸­ã®è¨­å®šã€2:é‹ç”¨ä¸­
 	var shimei_count = [];
 	var yoko,tate;
 
@@ -16,7 +16,7 @@
 		yoko = document.getElementById("config_yoko").value;
 		tate = document.getElementById("config_tate").value;
 
-		//w–¼ƒJƒEƒ“ƒ^[‚ğ—pˆÓ‚·‚é
+		//æŒ‡åã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’ç”¨æ„ã™ã‚‹
 		for (i = 0;i < tate ; i++) {
 			shimei_count[i] = [];
 
@@ -26,10 +26,10 @@
 			}
 		}
 
-		//‚Ü‚¸‚Í–¢g—p‚ÌÈ‚Ìİ’è
+		//ã¾ãšã¯æœªä½¿ç”¨ã®å¸­ã®è¨­å®š
 		mode = 1;
 
-		target.innerHTML = "<input type=\"button\" value=\"ŠJn‚·‚é\" onclick=\"Onconfig_start()\"/>";
+		target.innerHTML = "<input type=\"button\" value=\"é–‹å§‹ã™ã‚‹\" onclick=\"Onconfig_start()\"/>";
 		target_form.innerHTML = "";
 
 		show_shimei_table(-1,-1);
@@ -54,7 +54,7 @@
 			tate = name_string.length;
 			yoko = name_array[0].length;
 
-			//w–¼ƒJƒEƒ“ƒ^[‚ğ—pˆÓ‚·‚é
+			//æŒ‡åã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’ç”¨æ„ã™ã‚‹
 			for (i = 0;i < tate ; i++) {
 				shimei_count[i] = [];
 
@@ -66,7 +66,7 @@
 
 			for (i = 0;i < tate ; i++) {
 				for (j = 0;j < yoko ; j++) {
-					if (name_array[i][j].match("-")) { //== "-" ‚Åƒ`ƒFƒbƒN‚·‚é‚ÆA\r‚ªˆ«‚³‚ğ‚·‚é‚±‚Æ‚ª‚ ‚é
+					if (name_array[i][j].match("-")) { //== "-" ã§ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã¨ã€\rãŒæ‚ªã•ã‚’ã™ã‚‹ã“ã¨ãŒã‚ã‚‹
 						shimei_count[i][j].counter = -1;
 					} else {
 						shimei_count[i][j].student_name = name_array[i][j];
@@ -74,9 +74,9 @@
 				}
 			}
 
-			target_config.innerHTML = "<input type=\"button\" value=\"’N‚©‘I‚Ô\" onclick=\"Onconfig_choice()\"/>";
+			target_config.innerHTML = "<input type=\"button\" value=\"èª°ã‹é¸ã¶\" onclick=\"Onconfig_choice()\"/>";
 			target_form.innerHTML = "";
-			//‰^—pŠJn
+			//é‹ç”¨é–‹å§‹
 			mode = 2;
 
 			show_shimei_table(-1,-1);
@@ -89,10 +89,10 @@
 		var target_form = document.getElementById("getname");
 		var form = document.forms.getfileform;
 
-		//‰^—pŠJn
+		//é‹ç”¨é–‹å§‹
 		mode = 2;
 
-		target.innerHTML = "<input type=\"button\" value=\"’N‚©‘I‚Ô\" onclick=\"Onconfig_choice()\"/>";
+		target.innerHTML = "<input type=\"button\" value=\"èª°ã‹é¸ã¶\" onclick=\"Onconfig_choice()\"/>";
 		target_form.innerHTML = "";
 
 		show_shimei_table(-1,-1);
@@ -109,10 +109,10 @@
 		var target = document.getElementById("config");
 
 		switch(mode) {
-			case 1://–¢g—p‚ÌÈ‚Ìİ’è
+			case 1://æœªä½¿ç”¨ã®å¸­ã®è¨­å®š
 				shimei_count[i][j].counter = -1;
 				break;
-			case 2://‰^—p’†
+			case 2://é‹ç”¨ä¸­
 				shimei_count[i][j].counter = shimei_count[i][j].counter + 1;
 				break;
 		}
@@ -122,8 +122,8 @@
 		var target_filed = document.getElementById("table_filed");
 		var temp;
 
-		//‚È‚º‚©target_filed.innerHTML‚É’¼Ú•¶š—ñ‚ğ˜AŒ‹‚µ‚Ä‚¢‚­‚ÆAƒ^ƒO•”•ª‚ª”F¯‚³‚ê‚È‚¢B
-		//Œã‚Å’²¸‚·‚é‚±‚Æ
+		//ãªãœã‹target_filed.innerHTMLã«ç›´æ¥æ–‡å­—åˆ—ã‚’é€£çµã—ã¦ã„ãã¨ã€ã‚¿ã‚°éƒ¨åˆ†ãŒèªè­˜ã•ã‚Œãªã„ã€‚
+		//å¾Œã§èª¿æŸ»ã™ã‚‹ã“ã¨
 		temp = "<table border=1 width = \"75%\" height = \"75%\" >";
 		for (i = 0;i < tate ; i++) {
 			temp += "<tr>";
@@ -133,17 +133,17 @@
 				temp += "<td bgcolor=\"" + getcolor(shimei_count[i][j].counter) + "\">";
 
 				switch(mode) {
-					case 1://–¢g—p‚ÌÈ‚Ìİ’è
-						temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "‚±‚ÌÈ‚Í–¢g—p‚Å‚·" + "</span>" +  "</td>";
+					case 1://æœªä½¿ç”¨ã®å¸­ã®è¨­å®š
+						temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "ã“ã®å¸­ã¯æœªä½¿ç”¨ã§ã™" + "</span>" +  "</td>";
 						break;
-					case 2://‰^—p’†
+					case 2://é‹ç”¨ä¸­
 						if (shimei_count[i][j].counter != -1) {
 							if (i_ == i && j_ == j) {
-//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "Ÿ‚ÍŒN‚Ì”Ô‚¾I" + "‰ñ”:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
-								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + " Ÿ‚ÍŒN‚Ì”Ô‚¾I" + "@@@" + "</span>" +  "</td>";
+//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "æ¬¡ã¯å›ã®ç•ªã ï¼" + "å›æ•°:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
+								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + " æ¬¡ã¯å›ã®ç•ªã ï¼" + "ã€€ã€€ã€€" + "</span>" +  "</td>";
 							} else
-//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "‰ñ”:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
-								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + "@@@"  + "</span>" +  "</td>";
+//								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + "å›æ•°:" + String(shimei_count[i][j].counter) + "</span>" +  "</td>";
+								temp += "<span onclick=\"OnZasekiClick(" + String(i) + "," + String(j) + ")\">" + shimei_count[i][j].student_name + "ã€€ã€€ã€€"  + "</span>" +  "</td>";
 							}
 						break;
 				}
@@ -179,7 +179,7 @@
 		}
 		return color;
 	}
-	//–¢g—p‚ÌÈ‚ğœ‚¢‚½È‚Ì”‚ğ”‚¦‚é
+	//æœªä½¿ç”¨ã®å¸­ã‚’é™¤ã„ãŸå¸­ã®æ•°ã‚’æ•°ãˆã‚‹
 	function count_zaseki() {
 		var counter = 0;
 
@@ -192,8 +192,8 @@
 		}
 		return counter;
 	}
-	//g—p’†‚ÌÈ‚©‚çˆê‚Â‚ğƒ‰ƒ“ƒ_ƒ€‚Å‘I‚Ô
-	//ƒ_ƒT‚¢‚Ì‚Å‚±‚Ì‚Ö‚ñ‚à‚¤­‚µl‚¦‚é
+	//ä½¿ç”¨ä¸­ã®å¸­ã‹ã‚‰ä¸€ã¤ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§é¸ã¶
+	//ãƒ€ã‚µã„ã®ã§ã“ã®ã¸ã‚“ã‚‚ã†å°‘ã—è€ƒãˆã‚‹
 	function choice_zaseki() {
 		var temp = get_random_Integer(0, count_zaseki() - 1);
 		var exit_flg = 0;
@@ -222,12 +222,12 @@
 	}
 
 
-	//min‚©‚çmax‚Ü‚Å‚Ì®”‚©‚çƒ‰ƒ“ƒ_ƒ€‚É‘I‚ñ‚Åo—Í‚·‚éB
+	//minã‹ã‚‰maxã¾ã§ã®æ•´æ•°ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã‚“ã§å‡ºåŠ›ã™ã‚‹ã€‚
 	function get_random_Integer(min, max) {
 		var range = (max + 1) - min;
-		//‚¨•×‹­‚ß‚àBMath.random‚Í0<=x<1‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚È’l‚ğ•Ô‚·B
-		//‚ªAƒKƒ`‚Èƒ‰ƒ“ƒ_ƒ€‚Å‚Í‚È‚¢‚ÅƒZƒLƒ…ƒŠƒeƒB‚ª‹‚ß‚ç‚ê‚é‚à‚Ì‚É‚Íg‚¦‚È‚¢B
-		//Math.floora‚Í¬”“_ˆÈ‰º‚ÌØ‚èÌ‚Ä
+		//ãŠå‹‰å¼·ã‚ã‚‚ã€‚Math.randomã¯0<=x<1ã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’è¿”ã™ã€‚
+		//ãŒã€ã‚¬ãƒãªãƒ©ãƒ³ãƒ€ãƒ ã§ã¯ãªã„ã§ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ãŒæ±‚ã‚ã‚‰ã‚Œã‚‹ã‚‚ã®ã«ã¯ä½¿ãˆãªã„ã€‚
+		//Math.flooraã¯å°æ•°ç‚¹ä»¥ä¸‹ã®åˆ‡ã‚Šæ¨ã¦
 		var rand = Math.floor(Math.random() * range) + min;
 		return rand;
 	}
@@ -236,26 +236,26 @@
 		var target = document.getElementById("config");
 		var target_form = document.getElementById("getname");
 
-		target.innerHTML = "‰¡‚É";
+		target.innerHTML = "æ¨ªã«";
 		target.innerHTML += "<input type=\"text\" id=\"config_yoko\" value=\"\" size=\"3\" maxlength=\"3\"/>";
-		target.innerHTML += "—ñAc‚É";
+		target.innerHTML += "åˆ—ã€ç¸¦ã«";
 		target.innerHTML += "<input type=\"text\" id=\"config_tate\" value=\"\" size=\"3\" maxlength=\"3\"/>";
-		target.innerHTML += "—ñ@";
-		target.innerHTML += "<input type=\"button\" value=\"İ’è\" onclick=\"Onconfig()\"/>";
+		target.innerHTML += "åˆ—ã€€";
+		target.innerHTML += "<input type=\"button\" value=\"è¨­å®š\" onclick=\"Onconfig()\"/>";
 
-		target_form.innerHTML = "<form><input type=\"file\" id=\"getfile\" onchange=\"get_and_set_name()\"/></form>(csv‚ğw’è‚·‚éB–¢g—pÈ‚Í\"-\"BEOF‚ÍÅŒã‚Ìs‚É‚Â‚¯‚Ä‚¨‚­iÅŒã‚É‰üs‚µ‚È‚¢jB•¶šƒR[ƒh‚ªutf-8‚Å‚È‚¢‚Æ•¶š‰»‚¯‚·‚é‚Ì‚Å’ˆÓ)";
+		target_form.innerHTML = "<form><input type=\"file\" id=\"getfile\" onchange=\"get_and_set_name()\"/></form>(csvã‚’æŒ‡å®šã™ã‚‹ã€‚æœªä½¿ç”¨å¸­ã¯\"-\"ã€‚EOFã¯æœ€å¾Œã®è¡Œã«ã¤ã‘ã¦ãŠãï¼ˆæœ€å¾Œã«æ”¹è¡Œã—ãªã„ï¼‰ã€‚æ–‡å­—ã‚³ãƒ¼ãƒ‰ãŒutf-8ã§ãªã„ã¨æ–‡å­—åŒ–ã‘ã™ã‚‹ã®ã§æ³¨æ„)";
 
 	}
 
 </script>
 <style>
 	table {
-		table-layout: fixed;     /* ŒÅ’èƒŒƒCƒAƒEƒg */
+		table-layout: fixed;     /* å›ºå®šãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ */
 	}
 </style>
 </head>
 <body>
-<h1>Ÿ‚ÍŒN‚Ì”Ô‚¾I</h1>
+<h1>æ¬¡ã¯å›ã®ç•ªã ï¼</h1>
 <p id="config">
 </p>
 <p id="table_filed">

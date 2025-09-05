@@ -1,13 +1,13 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
+	<meta http-equiv="content-type" charset="UTF-8">
 	<script type="text/x-mathjax-config">
 	MathJax.Hub.Config({ 
 	  TeX: {  extensions: ["color.js"] }
 	});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
-	<title>2€’è—@“WŠJ®ƒWƒFƒlƒŒ[ƒ^(ŒW”‚ ‚è)</title> 
+	<title>2é …å®šç†ã€€å±•é–‹å¼ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿(ä¿‚æ•°ã‚ã‚Š)</title> 
 	<script language="javascript" type="text/javascript">
 	function OnButtonClick() {
 		const expo = Number(document.getElementById( "ruijyou" ).value ) ;
@@ -15,16 +15,16 @@
 		const bkeisuu = Number(document.getElementById( "b-keisuu" ).value ) ;
 		let target = document.getElementById("output");
 
-		//ŒW”Aw”‚ª–¢“ü—Í‚Ü‚½‚Í0‚Ìê‡‚Í“ü—Í‚ğ‘£‚·
+		//ä¿‚æ•°ã€æŒ‡æ•°ãŒæœªå…¥åŠ›ã¾ãŸã¯0ã®å ´åˆã¯å…¥åŠ›ã‚’ä¿ƒã™
 		if ( akeisuu  == 0 || bkeisuu  == 0 || expo  == 0 ) {
-			target.innerHTML += "0ˆÈŠO‚ÌŒW”Aw”‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢";
+			target.innerHTML += "0ä»¥å¤–ã®ä¿‚æ•°ã€æŒ‡æ•°ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„";
 			return ;
 		}
 
-		//‚±‚±‚©‚ç“WŠJ®‚Ì¶¬
+		//ã“ã“ã‹ã‚‰å±•é–‹å¼ã®ç”Ÿæˆ
 		target.innerHTML += "\\(";
 
-		//¶•Ó
+		//å·¦è¾º
 		target.innerHTML += "(";
 		if ( akeisuu  == -1 ) {
 			target.innerHTML += "-";
@@ -34,7 +34,7 @@
 		target.innerHTML += "a";
 		if (bkeisuu > 0) {
 			target.innerHTML += "+";
-		}//•‰‚Ì‚Æ‚«‚ÍŒW”•\¦‚Ìƒ}ƒCƒiƒX‚Å€‚ª‚Â‚È‚ª‚é
+		}//è² ã®ã¨ãã¯ä¿‚æ•°è¡¨ç¤ºã®ãƒã‚¤ãƒŠã‚¹ã§é …ãŒã¤ãªãŒã‚‹
 		if ( bkeisuu  == -1 ) {
 			target.innerHTML += "-";
 		} else if ( bkeisuu  != 1 ) {
@@ -48,14 +48,14 @@
 		for (let i=0; i <= expo; i++) {
 			const keisuu = my_exponential(akeisuu, expo-i) * my_exponential(bkeisuu, i);
 
-			//Å‰‚Ì€ˆÈŠO‚Í+‚Å‚Â‚È‚°‚é
+			//æœ€åˆã®é …ä»¥å¤–ã¯+ã§ã¤ãªã’ã‚‹
 			if ( i != 0 ) {
 				if (keisuu > 0) {
 					target.innerHTML += "+";
-				}//ŒW”‚ª•‰‚Ì‚Æ‚«‚ÍŒW”•\¦‚Ìƒ}ƒCƒiƒX‚Å€‚ª‚Â‚È‚ª‚é
+				}//ä¿‚æ•°ãŒè² ã®ã¨ãã¯ä¿‚æ•°è¡¨ç¤ºã®ãƒã‚¤ãƒŠã‚¹ã§é …ãŒã¤ãªãŒã‚‹
 			}
 
-			//ŒW”•”•ª
+			//ä¿‚æ•°éƒ¨åˆ†
 			const conbnation = my_conbnation(expo, i) * keisuu;
 			if (conbnation == -1) {
 				target.innerHTML += "-";
@@ -63,7 +63,7 @@
 				target.innerHTML += String(conbnation);
 			}
 
-			//a^ b^ ‚Ì•”•ª
+			//a^â–¡b^â–¡ã®éƒ¨åˆ†
 			if ( expo-i == 1 ) {
 				target.innerHTML += "a";
 			} else if ( expo-i != 0 ) {
@@ -78,23 +78,23 @@
 			}
 		}
 		target.innerHTML += "\\)";
-		//‚±‚±‚Ü‚Å“WŠJ®‚Ì¶¬
+		//ã“ã“ã¾ã§å±•é–‹å¼ã®ç”Ÿæˆ
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
-	//ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“(nCr)
+	//ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³(nCr)
 	function my_conbnation(n,r) {
 		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
 	}
-	//ŠKæ
+	//éšä¹—
 	function my_factorial(n) {
 		if (n==0) {
 			return 1;
 		}
 		return (n * my_factorial(n-1));
 	}
-	//—İæ(a‚Ìbæ)
+	//ç´¯ä¹—(aã®bä¹—)
 	function my_exponential(a,b) {
 		if (b==0) {
 			return 1;
@@ -104,22 +104,22 @@
 </script>
 </head>
 <body>
-<h1>2€’è—@“WŠJ®ƒWƒFƒlƒŒ[ƒ^(ŒW”‚ ‚è)</h1>
+<h1>2é …å®šç†ã€€å±•é–‹å¼ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿(ä¿‚æ•°ã‚ã‚Š)</h1>
 <p>
 	\( n= \)
 	<input type="text" id="ruijyou" value="" size="1" maxlength="1"/>
-	‚Ì‚Æ‚«A\( ( \)  
+	ã®ã¨ãã€\( ( \)  
 	<input type="text" id="a-keisuu" value="" size="2" maxlength="2"/>
 	\( a+ \)
 	<input type="text" id="b-keisuu" value="" size="2" maxlength="2"/>
-	\( b)^n \)@‚ğ“WŠJ‚·‚é
+	\( b)^n \)ã€€ã‚’å±•é–‹ã™ã‚‹
 	<div id="output"></div>
 </p>
 <p>
-	<input type="button" value="ŒvZ" onclick="OnButtonClick();"/>
+	<input type="button" value="è¨ˆç®—" onclick="OnButtonClick();"/>
 </p>
 <p>
-	<a href="BinomialTheorem.html">ŒW”‚ª1‚ÌƒP[ƒX‚Í‚±‚¿‚ç‚Ö</a>
+	<a href="BinomialTheorem.html">ä¿‚æ•°ãŒ1ã®ã‚±ãƒ¼ã‚¹ã¯ã“ã¡ã‚‰ã¸</a>
 </p>
 </body>
 </html>

@@ -1,6 +1,6 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
+	<meta http-equiv="content-type" charset="UTF-8">
 	<style>
 	.good {color:blue;}
 	.bad {color:red;}
@@ -11,9 +11,9 @@
 	});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
-	<title>’èÏ•ª‚Éƒ`ƒƒƒŒƒ“ƒW</title> 
+	<title>å®šç©åˆ†ã«ãƒãƒ£ãƒ¬ãƒ³ã‚¸</title> 
 	<script language="javascript" type="text/javascript">
-	//‚±‚¤‚¢‚¤ƒOƒ[ƒoƒ‹‚È•Ï”‚ğˆÀˆÕ‚É‘‚â‚·‚Æ€‚Ê
+	//ã“ã†ã„ã†ã‚°ãƒ­ãƒ¼ãƒãƒ«ãªå¤‰æ•°ã‚’å®‰æ˜“ã«å¢—ã‚„ã™ã¨æ­»ã¬
 	var level = 0;
 	var p;
 	var ans;
@@ -24,14 +24,14 @@
 		var yattane = 2;
 		var target_ans_bunbo;
 
-		//Ì“_‚Ì•”
-		//“š‚¦‚ª®”‚Ì‚Æ‚«
+		//æ¡ç‚¹ã®éƒ¨
+		//ç­”ãˆãŒæ•´æ•°ã®ã¨ã
 		if (ans.denominator == 1) {
 			if (target_ans_bunshi == ans.numerator ) {
 				yattane = 1;
 				level = level + 1;
 			}
-		//“š‚¦‚ª•ª”‚Ì‚Æ‚«
+		//ç­”ãˆãŒåˆ†æ•°ã®ã¨ã
 		} else {
 			target_ans_bunbo = Number(document.getElementById("bunbo").value);
 
@@ -41,7 +41,7 @@
 			}
 		}
 
-		//Ÿ‚Ì–â‘è‚Ìì¬‚Ì•”
+		//æ¬¡ã®å•é¡Œã®ä½œæˆã®éƒ¨
 		p = make_problem();
 		ans = my_integral(p);
 
@@ -52,11 +52,11 @@
 //		console.log(ans.numerator);
 //		console.log(ans.denominator);
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target_prob]);
 	}
 
-	//•ª”‚Ì‘«‚µZ
+	//åˆ†æ•°ã®è¶³ã—ç®—
 	function my_add_fraction(x, y) {
 		const divisor = my_EuclidsAlgorithm(x.denominator, y.denominator)
 		const xbaibun = y.denominator / divisor;
@@ -66,24 +66,24 @@
 		return my_about(z);
 	}
 
-	//•ª”‚ÌŠ|‚¯Z
+	//åˆ†æ•°ã®æ›ã‘ç®—
 	function my_multiple_fraction(x, y) {
 		var z = {numerator : (x.numerator * y.numerator),
 			denominator : (x.denominator * y.denominator)};
 		return my_about(z);
 	}
 
-	//–ñ•ª
-	//•ªq‚Í³‚Ì”‚Å‚à•‰‚Ì”‚Å‚à‚æ‚¢B•ª•ê‚Í³‚Ì”‚Ì‚İ‹–—e‚·‚éB
+	//ç´„åˆ†
+	//åˆ†å­ã¯æ­£ã®æ•°ã§ã‚‚è² ã®æ•°ã§ã‚‚ã‚ˆã„ã€‚åˆ†æ¯ã¯æ­£ã®æ•°ã®ã¿è¨±å®¹ã™ã‚‹ã€‚
 	function my_about(x) {
 		var minus = 0;
 
-		//•ªq‚ª0‚È‚ç‰½‚à‚µ‚È‚¢
+		//åˆ†å­ãŒ0ãªã‚‰ä½•ã‚‚ã—ãªã„
 		if (x.numerator == 0) {
 			return x;
 		}
 
-		//•ªq‚ª•‰‚Ì”‚È‚çˆê’U³‚Ì”‚É‚µ‚Ä‚¨‚¢‚ÄAÅŒã‚É–ß‚·
+		//åˆ†å­ãŒè² ã®æ•°ãªã‚‰ä¸€æ—¦æ­£ã®æ•°ã«ã—ã¦ãŠã„ã¦ã€æœ€å¾Œã«æˆ»ã™
 		if (x.numerator < 0) {
 			x.numerator = x.numerator * (-1);
 			minus = 1;
@@ -100,10 +100,10 @@
 		return x;
 	}
 
-	//ƒ†[ƒNƒŠƒbƒh‚ÌŒİœ–@‚É‚æ‚Á‚Äa‚Æb‚ÌÅ‘åŒö–ñ”‚ğ‹‚ß‚é
+	//ãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰ã®äº’é™¤æ³•ã«ã‚ˆã£ã¦aã¨bã®æœ€å¤§å…¬ç´„æ•°ã‚’æ±‚ã‚ã‚‹
 	function my_EuclidsAlgorithm(a, b) {
 		if (b > a) {
-			//a‚Æb‚ğ“ü‚ê‘Ö‚¦‚é
+			//aã¨bã‚’å…¥ã‚Œæ›¿ãˆã‚‹
 			const temp = a;
 			a = b;
 			b= temp;
@@ -119,12 +119,12 @@
 
 	}
 
-	//ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“
+	//ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³
 	function my_conbnation(n,r) {
 		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
 	}
 
-	//ŠKæ
+	//éšä¹—
 	function my_factorial(n) {
 		if (n==0) {
 			return 1;
@@ -132,7 +132,7 @@
 		return (n * my_factorial(n-1));
 	}
 
-	//—İæ(a‚Ìbæ)
+	//ç´¯ä¹—(aã®bä¹—)
 	function my_exponential(a,b) {
 		if (b==0) {
 			return 1;
@@ -140,8 +140,8 @@
 		return (a*my_exponential(a, (b-1)));
 	}
 
-	//—İæ(a‚ÌbæBa‚Í•ª”Ab‚Í®”)
-	//g‚Á‚Ä‚È‚¢‚æ[
+	//ç´¯ä¹—(aã®bä¹—ã€‚aã¯åˆ†æ•°ã€bã¯æ•´æ•°)
+	//ä½¿ã£ã¦ãªã„ã‚ˆãƒ¼
 	function my_exponential_fraction(a,b) {
 		var ichi = {numerator : 1,
 			denominator : 1 };
@@ -152,18 +152,18 @@
 		return (my_multiple_fraction(a, my_exponential_fraction(a, b-1)));
 	}
 
-	//min‚©‚çmax‚Ü‚Å‚Ì®”‚©‚çƒ‰ƒ“ƒ_ƒ€‚É‘I‚ñ‚Åo—Í‚·‚éB
+	//minã‹ã‚‰maxã¾ã§ã®æ•´æ•°ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã‚“ã§å‡ºåŠ›ã™ã‚‹ã€‚
 	function get_random_Integer(min, max) {
 		var range = (max + 1) - min;
-		//‚¨•×‹­‚ß‚àBMath.random‚Í0<=x<1‚Ì’†‚©‚çƒ‰ƒ“ƒ_ƒ€‚È’l‚ğ•Ô‚·B
-		//‚ªAƒKƒ`‚Èƒ‰ƒ“ƒ_ƒ€‚Å‚Í‚È‚¢‚ÅƒZƒLƒ…ƒŠƒeƒB‚ª‹‚ß‚ç‚ê‚é‚à‚Ì‚É‚Íg‚¦‚È‚¢B
-		//Math.floora‚Í¬”“_ˆÈ‰º‚ÌØ‚èÌ‚Ä
+		//ãŠå‹‰å¼·ã‚ã‚‚ã€‚Math.randomã¯0<=x<1ã®ä¸­ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ãªå€¤ã‚’è¿”ã™ã€‚
+		//ãŒã€ã‚¬ãƒãªãƒ©ãƒ³ãƒ€ãƒ ã§ã¯ãªã„ã§ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ãŒæ±‚ã‚ã‚‰ã‚Œã‚‹ã‚‚ã®ã«ã¯ä½¿ãˆãªã„ã€‚
+		//Math.flooraã¯å°æ•°ç‚¹ä»¥ä¸‹ã®åˆ‡ã‚Šæ¨ã¦
 		var rand = Math.floor(Math.random() * range) + min;
 		return rand;
 	}
 
-	//‘½€®‚Ì’èÏ•ª‚ÌŒvZ—p
-	//x‚Ìnæ‚ğa‚©‚çb‚Ü‚ÅÏ•ª‚µ‚½’l‚ğ‹‚ß‚éB
+	//å¤šé …å¼ã®å®šç©åˆ†ã®è¨ˆç®—ç”¨
+	//xã®nä¹—ã‚’aã‹ã‚‰bã¾ã§ç©åˆ†ã—ãŸå€¤ã‚’æ±‚ã‚ã‚‹ã€‚
 	function my_integral_inner(a, b, n) {
 		var aruijyou = my_exponential(a, (n + 1));
 		var bruijyou = my_exponential(b, (n + 1));
@@ -173,24 +173,24 @@
 		return my_about(z);
 	}
 
-	//•ª”‚ğlatex•\Œ»‚É‚·‚éB
-	//‘æ2ˆø”‚Í®”1A-1‚Ìê‡‚É•\¦‚ğÈ—ª‚·‚é‚©‚Ç‚¤‚©
-	//omitte:0 È—ª‚µ‚È‚¢
-	//omitte:1 È—ª‚·‚é
+	//åˆ†æ•°ã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
+	//ç¬¬2å¼•æ•°ã¯æ•´æ•°1ã€-1ã®å ´åˆã«è¡¨ç¤ºã‚’çœç•¥ã™ã‚‹ã‹ã©ã†ã‹
+	//omitte:0 çœç•¥ã—ãªã„
+	//omitte:1 çœç•¥ã™ã‚‹
 	function my_frac_to_latex_string(a, omitte) {
 		var latex = "";
 
-		//0‚ÍƒXƒ‹[
+		//0ã¯ã‚¹ãƒ«ãƒ¼
 		if (a.numerator == 0) {
 			return latex;
 		}
-		//•ª•ê‚ª1‚È‚ç®”•\¦
+		//åˆ†æ¯ãŒ1ãªã‚‰æ•´æ•°è¡¨ç¤º
 		if (a.denominator == 1) {
 			if (a.numerator == 1) {
 				if (omitte == 0) {
 					latex += String(a.numerator);
 				} else {
-					//‚±‚ÌƒP[ƒX‚Í•\¦‚ğÈ—ª
+					//ã“ã®ã‚±ãƒ¼ã‚¹ã¯è¡¨ç¤ºã‚’çœç•¥
 				}
 			} else if (a.numerator == -1) {
 				if (omitte == 0) {
@@ -203,11 +203,11 @@
 			}
 			return latex;
 		}
-		//ƒ}ƒCƒiƒX‚Ì‹L†‚Í•ª”‚Ì‘O‚Éo‚·
+		//ãƒã‚¤ãƒŠã‚¹ã®è¨˜å·ã¯åˆ†æ•°ã®å‰ã«å‡ºã™
 		if (a.numerator < 0) {
 			latex += "-";
 		}
-		//•ª•ê‚ª1‚Å‚È‚¯‚ê‚Î•ª”•\¦
+		//åˆ†æ¯ãŒ1ã§ãªã‘ã‚Œã°åˆ†æ•°è¡¨ç¤º
 		latex += "\\frac{";
 		if (a.numerator < 0) {
 			latex += String(a.numerator * (-1));
@@ -220,7 +220,7 @@
 		return latex;
 	}
 
-	//ax^n‚ğlatex•\Œ»‚É‚·‚éB
+	//ax^nã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
 	function my_kou_to_latex_string(a, n) {
 		var latex = "";
 
@@ -241,7 +241,7 @@
 		return latex;
 	}
 
-	//Ï•ª‚Ì®‚ğlatex•\Œ»‚É‚·‚éB
+	//ç©åˆ†ã®å¼ã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
 	function make_integral_latex_string(prob) {
 		var prev_kou_exist = 0;
 		var target="\\(";
@@ -280,7 +280,7 @@
 		return target;
 	}
 
-	//“ü—ÍƒtƒH[ƒ€‚ğ3Ÿ®—p‚Ö•ÏX
+	//å…¥åŠ›ãƒ•ã‚©ãƒ¼ãƒ ã‚’3æ¬¡å¼ç”¨ã¸å¤‰æ›´
 	function to3ji(n) {
 		var target = document.getElementById("input");
 		target.innerHTML = "\\( ( \\)";
@@ -291,56 +291,56 @@
 		target.innerHTML += "<input type=\"text\" id=\"1jyou_keisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
 		target.innerHTML += "\\( x + \\)";
 		target.innerHTML += "<input type=\"text\" id=\"teisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
 
-	//ƒŒƒxƒ‹•\¦
-	//comment æ“ª‚ÉˆêŒ¾‚Â‚¯‚éB
-	//0:‚Â‚¯‚È‚¢
-	//1:‚â‚Á‚½‚ËI
-	//2:‚´‚ñ‚Ë‚ñI
+	//ãƒ¬ãƒ™ãƒ«è¡¨ç¤º
+	//comment å…ˆé ­ã«ä¸€è¨€ã¤ã‘ã‚‹ã€‚
+	//0:ã¤ã‘ãªã„
+	//1:ã‚„ã£ãŸã­ï¼
+	//2:ã–ã‚“ã­ã‚“ï¼
 	function show_level(n, comment) {
 		var target = document.getElementById("level");
 
 		switch (comment) {
 			case 1:
-				target.innerHTML = "<dev class=\"good\">‚â‚Á‚½‚ËI³‰ğI</dev><br>";
+				target.innerHTML = "<dev class=\"good\">ã‚„ã£ãŸã­ï¼æ­£è§£ï¼</dev><br>";
 				break;
 			case 2:
-				target.innerHTML = "<dev class=\"bad\">‚´‚ñ‚Ë‚ñI•s³‰ğ!</dev><br>";
+				target.innerHTML = "<dev class=\"bad\">ã–ã‚“ã­ã‚“ï¼ä¸æ­£è§£!</dev><br>";
 				break;
 			default:
 				target.innerHTML = "";
 				break;
 		}
 
-		target.innerHTML += "‚¢‚ÜŒN‚Íw";
+		target.innerHTML += "ã„ã¾å›ã¯ã€";
 		switch (n) {
 			case 0:
-				target.innerHTML += "‚«‚ñ‚¬‚å";
+				target.innerHTML += "ãã‚“ãã‚‡";
 				break;
 			case 1:
-				target.innerHTML += "‚Ğ‚æ‚±";
+				target.innerHTML += "ã²ã‚ˆã“";
 				break;
 			case 2:
-				target.innerHTML += "lŠÔ";
+				target.innerHTML += "äººé–“";
 				break;
 			case 3:
-				target.innerHTML += "ã‹‰‘–¯";
+				target.innerHTML += "ä¸Šç´šå›½æ°‘";
 				break;
 			default:
-				target.innerHTML += "_";
+				target.innerHTML += "ç¥";
 				break;
 		}
-		target.innerHTML += "xƒŒƒxƒ‹‚Å‚·B";
+		target.innerHTML += "ã€ãƒ¬ãƒ™ãƒ«ã§ã™ã€‚";
 	}
 
-	//‘½€®‚Ì’èÏ•ª‚ÌŒvZ—p
+	//å¤šé …å¼ã®å®šç©åˆ†ã®è¨ˆç®—ç”¨
 	function my_integral(p) {
 		var temp3ji, temp2ji, temp1ji, temp0ji, integral;
 
-		//‚±‚±‚Å’èÏ•ª‚Ì“š‚¦‚ğŒvZ‚·‚é
+		//ã“ã“ã§å®šç©åˆ†ã®ç­”ãˆã‚’è¨ˆç®—ã™ã‚‹
 		temp3ji = my_multiple_fraction(p.keisuu_3ji, my_integral_inner(p.katan, p.jyoutan, 3));
 		temp2ji = my_multiple_fraction(p.keisuu_2ji, my_integral_inner(p.katan, p.jyoutan, 2));
 		temp1ji = my_multiple_fraction(p.keisuu_1ji, my_integral_inner(p.katan, p.jyoutan, 1));
@@ -373,7 +373,7 @@
 			target.innerHTML = "<input type=\"text\" id=\"bunshi\" value=\"\" size=\"4\" maxlength=\"4\"/>"
 			target.innerHTML += "/";
 			target.innerHTML += "<input type=\"text\" id=\"bunbo\" value=\"\" size=\"4\" maxlength=\"4\"/>"
-			target.innerHTML += "@i¶‚ª•ªq‚Å‰E‚ª•ª•ê‚Å‚·B“š‚¦‚ªƒ}ƒCƒiƒX‚Ìê‡‚Í•ªq‚ğ•‰‚Ì”‚É‚µ‚Ä‚­‚¾‚³‚¢j"
+			target.innerHTML += "ã€€ï¼ˆå·¦ãŒåˆ†å­ã§å³ãŒåˆ†æ¯ã§ã™ã€‚ç­”ãˆãŒãƒã‚¤ãƒŠã‚¹ã®å ´åˆã¯åˆ†å­ã‚’è² ã®æ•°ã«ã—ã¦ãã ã•ã„ï¼‰"
 		}
 	}
 
@@ -390,25 +390,25 @@
 //		console.log(ans.numerator);
 //		console.log(ans.denominator);
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
 
 </script>
 </head>
 <body>
-<h1>’èÏ•ª‚Éƒ`ƒƒƒŒƒ“ƒW@`‘‚­lŠÔ‚É‚È‚è‚½‚¢`</h1>
+<h1>å®šç©åˆ†ã«ãƒãƒ£ãƒ¬ãƒ³ã‚¸ã€€ï½æ—©ãäººé–“ã«ãªã‚ŠãŸã„ï½</h1>
 <p id="level">
 </p>
 <p>
 	<span id="prob">
 	</span>
-	‚Ì’l‚ğ‹‚ß‚È‚³‚¢
+	ã®å€¤ã‚’æ±‚ã‚ãªã•ã„
 </p>
 <p id="answer">
 </p>
 <p>
-	<input type="button" value="“š‚¦‚é" onclick="OnButtonClick();"/>
+	<input type="button" value="ç­”ãˆã‚‹" onclick="OnButtonClick();"/>
 </p>
 </body>
 </html>

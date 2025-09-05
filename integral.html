@@ -1,13 +1,13 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
+	<meta http-equiv="content-type" charset="UTF-8">
 	<script type="text/x-mathjax-config">
 	MathJax.Hub.Config({ 
 	  TeX: {  extensions: ["color.js"] }
 	});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
-	<title>’èÏ•ª‚ÌŒvZ</title> 
+	<title>å®šç©åˆ†ã®è¨ˆç®—</title> 
 	<script language="javascript" type="text/javascript">
 	function OnButtonClick() {
 		var functionkind = document.getElementById( "radio1" ) ;
@@ -36,8 +36,8 @@
 		integral = my_add_fraction(integral, temp1ji);
 		integral = my_add_fraction(integral, temp0ji);
 
-		//‚±‚±‚©‚ç“š‚¦•”•ª‚Ì¶¬
-		//¶•Ó
+		//ã“ã“ã‹ã‚‰ç­”ãˆéƒ¨åˆ†ã®ç”Ÿæˆ
+		//å·¦è¾º
 		target.innerHTML = "\\(";
 		target.innerHTML += "\\int^{";
 		target.innerHTML += String(b);
@@ -70,16 +70,16 @@
 		}
 		target.innerHTML += my_kou_to_latex_string(x0,0);
 		target.innerHTML += ")dx=";
-		//‰E•Ó
-		//•ª•ê‚ª1‚È‚ç®”
+		//å³è¾º
+		//åˆ†æ¯ãŒ1ãªã‚‰æ•´æ•°
 		target.innerHTML += my_frac_to_latex_string(integral,0);
 		target.innerHTML += "\\)";
-		//‚±‚±‚Ü‚Å“WŠJ®‚Ì¶¬
+		//ã“ã“ã¾ã§å±•é–‹å¼ã®ç”Ÿæˆ
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
-	//•ª”‚Ì‘«‚µZ
+	//åˆ†æ•°ã®è¶³ã—ç®—
 	function my_add_fraction(x, y) {
 		const divisor = my_EuclidsAlgorithm(x.denominator, y.denominator)
 		const xbaibun = y.denominator / divisor;
@@ -88,23 +88,23 @@
 			denominator : (x.denominator * xbaibun)};
 		return my_about(z);
 	}
-	//•ª”‚ÌŠ|‚¯Z
+	//åˆ†æ•°ã®æ›ã‘ç®—
 	function my_multiple_fraction(x, y) {
 		var z = {numerator : (x.numerator * y.numerator),
 			denominator : (x.denominator * y.denominator)};
 		return my_about(z);
 	}
-	//–ñ•ª
-	//•ªq‚Í³‚Ì”‚Å‚à•‰‚Ì”‚Å‚à‚æ‚¢B•ª•ê‚Í³‚Ì”‚Ì‚İ‹–—e‚·‚éB
+	//ç´„åˆ†
+	//åˆ†å­ã¯æ­£ã®æ•°ã§ã‚‚è² ã®æ•°ã§ã‚‚ã‚ˆã„ã€‚åˆ†æ¯ã¯æ­£ã®æ•°ã®ã¿è¨±å®¹ã™ã‚‹ã€‚
 	function my_about(x) {
 		var minus = 0;
 
-		//•ªq‚ª0‚È‚ç‰½‚à‚µ‚È‚¢
+		//åˆ†å­ãŒ0ãªã‚‰ä½•ã‚‚ã—ãªã„
 		if (x.numerator == 0) {
 			return x;
 		}
 
-		//•ªq‚ª•‰‚Ì”‚È‚çˆê’U³‚Ì”‚É‚µ‚Ä‚¨‚¢‚ÄAÅŒã‚É–ß‚·
+		//åˆ†å­ãŒè² ã®æ•°ãªã‚‰ä¸€æ—¦æ­£ã®æ•°ã«ã—ã¦ãŠã„ã¦ã€æœ€å¾Œã«æˆ»ã™
 		if (x.numerator < 0) {
 			x.numerator = x.numerator * (-1);
 			minus = 1;
@@ -120,10 +120,10 @@
 		}
 		return x;
 	}
-	//ƒ†[ƒNƒŠƒbƒh‚ÌŒİœ–@‚É‚æ‚Á‚Äa‚Æb‚ÌÅ‘åŒö–ñ”‚ğ‹‚ß‚é
+	//ãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰ã®äº’é™¤æ³•ã«ã‚ˆã£ã¦aã¨bã®æœ€å¤§å…¬ç´„æ•°ã‚’æ±‚ã‚ã‚‹
 	function my_EuclidsAlgorithm(a, b) {
 		if (b > a) {
-			//a‚Æb‚ğ“ü‚ê‘Ö‚¦‚é
+			//aã¨bã‚’å…¥ã‚Œæ›¿ãˆã‚‹
 			const temp = a;
 			a = b;
 			b= temp;
@@ -138,26 +138,26 @@
 		}
 
 	}
-	//ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“
+	//ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³
 	function my_conbnation(n,r) {
 		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
 	}
-	//ŠKæ
+	//éšä¹—
 	function my_factorial(n) {
 		if (n==0) {
 			return 1;
 		}
 		return (n * my_factorial(n-1));
 	}
-	//—İæ(a‚Ìbæ)
+	//ç´¯ä¹—(aã®bä¹—)
 	function my_exponential(a,b) {
 		if (b==0) {
 			return 1;
 		}
 		return (a*my_exponential(a, (b-1)));
 	}
-	//—İæ(a‚ÌbæBa‚Í•ª”Ab‚Í®”)
-	//g‚Á‚Ä‚È‚¢‚æ[
+	//ç´¯ä¹—(aã®bä¹—ã€‚aã¯åˆ†æ•°ã€bã¯æ•´æ•°)
+	//ä½¿ã£ã¦ãªã„ã‚ˆãƒ¼
 	function my_exponential_fraction(a,b) {
 		var ichi = {numerator : 1,
 			denominator : 1 };
@@ -167,8 +167,8 @@
 		}
 		return (my_multiple_fraction(a, my_exponential_fraction(a, b-1)));
 	}
-	//‘½€®‚Ì’èÏ•ª‚ÌŒvZ—p
-	//x‚Ìnæ‚ğa‚©‚çb‚Ü‚ÅÏ•ª‚µ‚½’l‚ğ‹‚ß‚éB
+	//å¤šé …å¼ã®å®šç©åˆ†ã®è¨ˆç®—ç”¨
+	//xã®nä¹—ã‚’aã‹ã‚‰bã¾ã§ç©åˆ†ã—ãŸå€¤ã‚’æ±‚ã‚ã‚‹ã€‚
 	function my_integral_inner(a, b, n) {
 		var aruijyou = my_exponential(a, (n + 1));
 		var bruijyou = my_exponential(b, (n + 1));
@@ -177,24 +177,24 @@
 			denominator : (n + 1)};
 		return my_about(z);
 	}
-	//•ª”‚ğlatex•\Œ»‚É‚·‚éB
-	//‘æ2ˆø”‚Í®”1A-1‚Ìê‡‚É•\¦‚ğÈ—ª‚·‚é‚©‚Ç‚¤‚©
-	//omitte:0 È—ª‚µ‚È‚¢
-	//omitte:1 È—ª‚·‚é
+	//åˆ†æ•°ã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
+	//ç¬¬2å¼•æ•°ã¯æ•´æ•°1ã€-1ã®å ´åˆã«è¡¨ç¤ºã‚’çœç•¥ã™ã‚‹ã‹ã©ã†ã‹
+	//omitte:0 çœç•¥ã—ãªã„
+	//omitte:1 çœç•¥ã™ã‚‹
 	function my_frac_to_latex_string(a, omitte) {
 		var latex = "";
 
-		//0‚ÍƒXƒ‹[
+		//0ã¯ã‚¹ãƒ«ãƒ¼
 		if (a.numerator == 0) {
 			return latex;
 		}
-		//•ª•ê‚ª1‚È‚ç®”•\¦
+		//åˆ†æ¯ãŒ1ãªã‚‰æ•´æ•°è¡¨ç¤º
 		if (a.denominator == 1) {
 			if (a.numerator == 1) {
 				if (omitte == 0) {
 					latex += String(a.numerator);
 				} else {
-					//‚±‚ÌƒP[ƒX‚Í•\¦‚ğÈ—ª
+					//ã“ã®ã‚±ãƒ¼ã‚¹ã¯è¡¨ç¤ºã‚’çœç•¥
 				}
 			} else if (a.numerator == -1) {
 				if (omitte == 0) {
@@ -207,11 +207,11 @@
 			}
 			return latex;
 		}
-		//ƒ}ƒCƒiƒX‚Ì‹L†‚Í•ª”‚Ì‘O‚Éo‚·
+		//ãƒã‚¤ãƒŠã‚¹ã®è¨˜å·ã¯åˆ†æ•°ã®å‰ã«å‡ºã™
 		if (a.numerator < 0) {
 			latex += "-";
 		}
-		//•ª•ê‚ª1‚Å‚È‚¯‚ê‚Î•ª”•\¦
+		//åˆ†æ¯ãŒ1ã§ãªã‘ã‚Œã°åˆ†æ•°è¡¨ç¤º
 		latex += "\\frac{";
 		if (a.numerator < 0) {
 			latex += String(a.numerator * (-1));
@@ -223,7 +223,7 @@
 		latex += "}";
 		return latex;
 	}
-	//ax^n‚ğlatex•\Œ»‚É‚·‚éB
+	//ax^nã‚’latexè¡¨ç¾ã«ã™ã‚‹ã€‚
 	function my_kou_to_latex_string(a, n) {
 		var latex = "";
 
@@ -244,7 +244,7 @@
 		return latex;
 	}
 
-	//“ü—ÍƒtƒH[ƒ€‚ğ3Ÿ®—p‚Ö•ÏX
+	//å…¥åŠ›ãƒ•ã‚©ãƒ¼ãƒ ã‚’3æ¬¡å¼ç”¨ã¸å¤‰æ›´
 	function to3ji(n) {
 		var target = document.getElementById("input");
 		target.innerHTML = "\\( ( \\)";
@@ -255,22 +255,22 @@
 		target.innerHTML += "<input type=\"text\" id=\"1jyou_keisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
 		target.innerHTML += "\\( x + \\)";
 		target.innerHTML += "<input type=\"text\" id=\"teisuu\" value=\"\" size=\"2\" maxlength=\"2\"/>";
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
 </script>
 </head>
 <body>
-<h1>’èÏ•ª‚ÌŒvZ</h1>
+<h1>å®šç©åˆ†ã®è¨ˆç®—</h1>
 <p>
-	<input type="radio" id="3jishiki" name="radio1" value="3jishiki" onclick="to3ji()" checked> 3Ÿ®
+	<input type="radio" id="3jishiki" name="radio1" value="3jishiki" onclick="to3ji()" checked> 3æ¬¡å¼
 </p>
 <p >
 	\( a= \)
 	<input type="text" id="katan" value="" size="2" maxlength="2"/>
 	\( b= \)
 	<input type="text" id="jyoutan" value="" size="2" maxlength="2"/>
-	‚Ì‚Æ‚«
+	ã®ã¨ã
 	<br>
 	\( \int^b_a \)
 	<span id="input">
@@ -283,13 +283,13 @@
 	\( x + \)
 	<input type="text" id="teisuu" value="" size="3" maxlength="3"/>
 	</span>
-	\( )dx \)@‚ğŒvZ‚·‚éBiŒW”1‚Ìê‡‚Í1‚Æ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢BŒW”‚ğ“ü—Í‚µ‚È‚¢‚Æ0ˆµ‚¢‚Å‚·Bj
+	\( )dx \)ã€€ã‚’è¨ˆç®—ã™ã‚‹ã€‚ï¼ˆä¿‚æ•°1ã®å ´åˆã¯1ã¨å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚ä¿‚æ•°ã‚’å…¥åŠ›ã—ãªã„ã¨0æ‰±ã„ã§ã™ã€‚ï¼‰
 	<div id="output"></div>
 </p>
 <p>
-	<input type="button" value="ŒvZ" onclick="OnButtonClick();"/>
+	<input type="button" value="è¨ˆç®—" onclick="OnButtonClick();"/>
 	<br>
-	<a href="integral_quiz.html">’èÏ•ª‚Éƒ`ƒƒƒŒƒ“ƒW</a>
+	<a href="integral_quiz.html">å®šç©åˆ†ã«ãƒãƒ£ãƒ¬ãƒ³ã‚¸</a>
 </p>
 </body>
 </html>

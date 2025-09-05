@@ -1,29 +1,29 @@
-<html>
+ï»¿<html>
 <head>
-	<meta http-equiv="content-type" charset="Shift_JIS">
+	<meta http-equiv="content-type" charset="UTF-8">
 	<script type="text/x-mathjax-config">
 	MathJax.Hub.Config({ 
 	  TeX: {  extensions: ["color.js"] }
 	});
 	</script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML"></script>
-	<title>2€’è—@“WŠJ®ƒWƒFƒlƒŒ[ƒ^</title> 
+	<title>2é …å®šç†ã€€å±•é–‹å¼ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿</title> 
 	<script language="javascript" type="text/javascript">
 	function OnButtonClick() {
 		var howtoshow = document.getElementById( "radio1" ) ;
 		var expo = Number(document.getElementById( "text1" ).value ) ;
 		var target = document.getElementById("output");
 
-		//‚±‚±‚©‚ç“WŠJ®‚Ì¶¬
+		//ã“ã“ã‹ã‚‰å±•é–‹å¼ã®ç”Ÿæˆ
 		target.innerHTML += "\\(";
 
 		for (let i=0; i <= expo; i++) {
-			//Å‰‚Ì€ˆÈŠO‚Í+‚Å‚Â‚È‚°‚é
+			//æœ€åˆã®é …ä»¥å¤–ã¯+ã§ã¤ãªã’ã‚‹
 			if ( i != 0 ) {
 				target.innerHTML += "+";
 			}
 
-			//ŒW”•”•ª
+			//ä¿‚æ•°éƒ¨åˆ†
 			if ( howtoshow.checked ) {
 				var conbnation = my_conbnation(expo, i);
 				if (conbnation != 1) {
@@ -36,7 +36,7 @@
 				target.innerHTML += String(i);
 			}
 
-			//a^ b^ ‚Ì•”•ª
+			//a^â–¡b^â–¡ã®éƒ¨åˆ†
 			if ( howtoshow.checked ) {
 				if ( expo-i == 1 ) {
 					target.innerHTML += "a";
@@ -61,16 +61,16 @@
 			}
 		}
 		target.innerHTML += "\\)";
-		//‚±‚±‚Ü‚Å“WŠJ®‚Ì¶¬
+		//ã“ã“ã¾ã§å±•é–‹å¼ã®ç”Ÿæˆ
 
-		//mathjax‚É‚æ‚é•`‰æ‚ğ—v‹‚·‚é
+		//mathjaxã«ã‚ˆã‚‹æç”»ã‚’è¦æ±‚ã™ã‚‹
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub,target]);
 	}
-	//ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“
+	//ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³
 	function my_conbnation(n,r) {
 		return (my_factorial(n) / (my_factorial(r) * my_factorial(n-r)));
 	}
-	//ŠKæ
+	//éšä¹—
 	function my_factorial(n) {
 		if (n==0) {
 			return 1;
@@ -80,22 +80,22 @@
 </script>
 </head>
 <body>
-<h1>2€’è—@“WŠJ®ƒWƒFƒlƒŒ[ƒ^</h1>
-<p>•\¦•û–@
-	<input type="radio" id="radio1" name="radio1" value="num" checked> ”’l
-	<input type="radio" id="radio2" name="radio1" value="combination"> ƒRƒ“ƒrƒl[ƒVƒ‡ƒ“
+<h1>2é …å®šç†ã€€å±•é–‹å¼ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿</h1>
+<p>è¡¨ç¤ºæ–¹æ³•
+	<input type="radio" id="radio1" name="radio1" value="num" checked> æ•°å€¤
+	<input type="radio" id="radio2" name="radio1" value="combination"> ã‚³ãƒ³ãƒ“ãƒãƒ¼ã‚·ãƒ§ãƒ³
 </p>
 <p>
 	\( n= \)
 	<input type="text" id="text1" value="" size="1" maxlength="1"/>
-	‚Ì‚Æ‚«A\( (a+b)^n= \)
+	ã®ã¨ãã€\( (a+b)^n= \)
 	<div id="output"></div>
 </p>
 <p>
-	<input type="button" value="ŒvZ" onclick="OnButtonClick();"/>
+	<input type="button" value="è¨ˆç®—" onclick="OnButtonClick();"/>
 </p>
 <p>
-	<a href="BinomialTheorem2.html">ŒW”‚ ‚è‚ÌƒP[ƒX‚Í‚±‚¿‚ç‚Ö</a>
+	<a href="BinomialTheorem2.html">ä¿‚æ•°ã‚ã‚Šã®ã‚±ãƒ¼ã‚¹ã¯ã“ã¡ã‚‰ã¸</a>
 </p>
 </body>
 </html>
