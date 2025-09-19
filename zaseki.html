@@ -228,7 +228,15 @@
 		//お勉強めも。Math.randomは0<=x<1の中からランダムな値を返す。
 		//が、ガチなランダムではないでセキュリティが求められるものには使えない。
 		//Math.flooraは小数点以下の切り捨て
-		var rand = Math.floor(Math.random() * range) + min;
+
+		// どうもランダムっぽさが足りないので、
+		// 現在時刻の秒数を使って、乱数を何度か作ってみる。
+		let i, rand, d = new Date();
+		let temp = d.getMilliseconds() % 10; 
+		rand = Math.floor(Math.random() * range) + min;
+		for (i = 0; i < temp; i++) {
+			rand = Math.floor(Math.random() * range) + min;
+		}
 		return rand;
 	}
 
