@@ -1,0 +1,92 @@
+﻿<html>
+<head>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      font-size     : x-large;
+      line-height   : 1.8;
+    }
+    button, input {
+      font-size     : x-large;
+      padding       : 8px 16px;
+      margin-top    : 12px;
+      margin-bottom : 12px;
+    }
+  </style>
+  <meta http-equiv="content-type" charset="UTF-8">
+  <title>mod の計算</title> 
+  <script language="javascript" type="text/javascript">
+    window.onload = function() {
+
+      let obj = document.getElementById("calcM^e");
+      obj.onclick = calcPower;
+    }
+
+    function calcPower () {
+      const objM = document.getElementById("varM");
+      const objx = document.getElementById("varx");
+      const objn = document.getElementById("varn");
+
+      const strM = objM.value.trim();
+      const strx = objx.value.trim();
+      const strn = objn.value.trim();
+
+      // ① 未入力チェック：いずれかが空の場合は計算を実行しない
+      if (strM === "" || strx === "" || strn === "") {
+        alert("M、x、n のすべての項目に数字を入力してください。");
+        return;
+      }
+
+      const M = Number(strM);
+      const x = Number(strx);
+      const n = Number(strn);
+
+      // (オプション) 法 n が 0 や 1 の場合のゼロ除算防止
+      if (n <= 0) {
+        alert("n には 1 以上の整数を入力してください。");
+        return;
+      }
+
+      let i, message;
+      if (x === 0) {
+        message = 1 % n;
+      } else {
+        message = M % n;
+        for (i = 0; i < x - 1; i++) {
+          message = (message * M) % n;
+        }
+      }
+
+      const targetObj = document.getElementById("valueOfM^e");
+
+      // 動的な数式文字列を作成して差し替え
+      targetObj.innerHTML = `\\( ${M}^{${x}} \\pmod{${n}} = ${message} \\)`;
+
+      // MathJaxに再レンダリングを依頼
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([targetObj]);
+      }
+    }
+
+</script>
+
+</head>
+<body>
+<h1>mod の計算</h1>
+\(M=\)
+<input type="number" id="varM">,<br>
+\(x=\)
+<input type="number" id="varx">,<br>
+\(n=\)
+<input type="number" id="varn">
+のとき
+<br>
+<button id="calcM^e">\(M^x \pmod{n}\)の値を計算する</button>
+<br>
+<span id="valueOfM^e"></span> です。
+
+  <p><a href="index.html">戻る</a></p>
+</p>
+</body>
+</html>
